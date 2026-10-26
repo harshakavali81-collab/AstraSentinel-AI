@@ -22,6 +22,17 @@ jobs:
         env:
           ASTRA_OFFLINE: '1'
         run: python -m pytest tests -v --cov=astrasentinel --cov-report=term-missing
+      - name: Generate downloadable scientific demo artifacts
+        env:
+          ASTRA_OFFLINE: '1'
+        run: python -m scripts.generate_demo_artifacts --output artifacts/reports
+      - name: Publish demo CSV, JSON and SVG as workflow artifact
+        uses: actions/upload-artifact@v4
+        with:
+          name: astrasentinel-scientific-demo
+          path: artifacts/reports/
+          if-no-files-found: error
+          retention-days: 30
   frontend-build:
     runs-on: ubuntu-latest
     timeout-minutes: 15

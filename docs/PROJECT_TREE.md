@@ -17,6 +17,7 @@ AstraSentinel-AI/
 │       ├── ingestion.py           CelesTrak, NOAA, caching, fallback
 │       ├── orbit.py               SGP4, TEME, approximate ECEF
 │       ├── atmosphere.py          Exponential density and drag
+│       ├── reporting.py           Source-attributed science snapshots
 │       ├── rocket.py              Rocket mass, gravity and integration
 │       └── telemetry.py           Synthetic ML anomaly detection
 ├── frontend/
@@ -29,14 +30,20 @@ AstraSentinel-AI/
 │       ├── main.jsx
 │       ├── api.js
 │       ├── App.jsx                Mission pages and charts
+│       ├── AtmospherePage.jsx     Atmosphere visualization and multiplier
+│       ├── MissionExportPanel.jsx  JSON and CSV browser exports
 │       ├── OrbitGlobe.jsx         Three.js Earth and orbit
 │       └── styles.css
+├── scripts/
+│   ├── __init__.py
+│   └── generate_demo_artifacts.py   Offline CSV/JSON/SVG builder
 ├── tests/
 │   ├── conftest.py                No-network fixture
 │   ├── test_ingestion.py
 │   ├── test_orbit.py
 │   ├── test_rocket.py
 │   ├── test_telemetry.py
+│   └── test_reporting.py
 │   └── test_api.py
 ├── docs/
 │   ├── images/
@@ -52,6 +59,7 @@ AstraSentinel-AI/
 │   ├── MODEL_CARD.md
 │   ├── PHYSICS.md
 │   ├── PROJECT_TREE.md
+│   ├── REPORTING.md
 │   └── TEST_PLAN.md
 ├── .env.example
 ├── .gitignore

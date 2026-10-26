@@ -29,6 +29,8 @@
 | Space-weather observations | NOAA SWPC Kp data, timeline, storm threshold and freshness | Supports 2026 JSON shape, labeled fallback |
 | Satellite Health ML | Seeded telemetry, IsolationForest, artificial fault injection, z-score diagnostics | Synthetic-only training and evaluation |
 | Rocket Lab | 1D variable-mass ascent with gravity, density, thrust and drag | Educational numerical simulation |
+| Atmospheric Density Lab | Adjustable exponential density profile with logarithmic visualization | Simplified reference atmosphere, not empirical validation |
+| Research Report Export | Download mission JSON and orbital, rocket and synthetic telemetry CSVs | Source-attributed snapshots; offline SVG/CSV/JSON generator |
 | Mission dashboard | React/Vite, react-three-fiber/Three.js, Recharts, responsive styles | Served via nginx/Docker or Vite |
 | API and verification | FastAPI endpoints, bounded request validation, pytest, GitHub Actions | Offline deterministic tests |
 
@@ -39,7 +41,8 @@
 3. **Satellite Health AI** — inspect synthetic anomaly events, evaluated metrics and score custom hypothetical readings.
 4. **Space Weather** — view NOAA Kp trends, storm threshold and actual/demo source status.
 5. **Rocket Lab** — adjust thrust, propellant, mass, atmospheric multiplier and analyze trajectory plots.
-6. **System Architecture** — trace public data, scientific models, REST API, frontend and test coverage.
+6. **Atmospheric Density Lab** — change air-density multiplier and inspect logarithmic altitude curves.
+7. **System Architecture** — trace public data, scientific models, REST API, frontend and test coverage.
 
 ## 🚀 Quick start
 
@@ -94,6 +97,14 @@ cd frontend
 npm install
 npm run build
 ~~~
+
+Generate deterministic **JSON + CSV + SVG** scientific reports:
+
+~~~bash
+python -m scripts.generate_demo_artifacts --output artifacts/reports
+~~~
+
+Download the generated samples from a successful [GitHub Actions workflow run](https://github.com/harshakavali81-collab/AstraSentinel-AI/actions/workflows/ci.yml) under the artifact named **astrasentinel-scientific-demo**.
 
 The test fixture forces offline mode. GitHub Actions runs Python tests and a separate React build on every push to main and every pull request. No secret API key is required.
 
@@ -158,6 +169,7 @@ flowchart TD
 | [Test Plan](docs/TEST_PLAN.md) | Repeatable test strategy and scientific validation gaps |
 | [Limitations](docs/LIMITATIONS.md) | Data caveats, hosting and safety limitations |
 | [Interview Guide](docs/INTERVIEW_GUIDE.md) | Job-project explanation and resume bullets |
+| [Mission Reports](docs/REPORTING.md) | Downloadable JSON/CSV, offline graphs and CI artifacts |
 
 ## 🌐 External data acknowledgements
 

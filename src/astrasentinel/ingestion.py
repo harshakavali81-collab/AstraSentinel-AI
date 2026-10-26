@@ -92,6 +92,8 @@ def normalize_kp(payload: Any) -> list[dict[str, Any]]:
         try:
             date = str(row.get("time_tag", ""))
             stamp = datetime.fromisoformat(date.replace("Z", "+00:00"))
+            stamp = (stamp.replace(tzinfo=timezone.utc) if stamp.tzinfo is None
+                     else stamp.astimezone(timezone.utc))
             kp = float(row.get("Kp", row.get("kp_index", row.get("kp"))))
             if not (0 <= kp <= 9):
                 continue
@@ -100,6 +102,7 @@ def normalize_kp(payload: Any) -> list[dict[str, Any]]:
             continue
     if not result:
         raise ValueError("No usable NOAA Kp observations")
+    result.sort(key=lambda sample: sample['time'])
     return result[-56:]
 
 

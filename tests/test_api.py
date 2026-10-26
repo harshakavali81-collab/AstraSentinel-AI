@@ -48,3 +48,16 @@ def test_atmosphere_endpoint():
     r = client.get('/api/atmosphere')
     assert r.status_code == 200
     assert r.json()['points'][0]['density_kg_m3'] == 1.225
+
+
+def test_mission_report_endpoint_has_disclosures():
+    r = client.get('/api/mission/report')
+    assert r.status_code == 200, r.text
+    report = r.json()
+    assert report['schema_version'] == '1.0'
+    assert report['mode'] == 'educational_research_demonstration'
+    assert report['satellite']['orbit_status'] == 'demo'
+    assert report['space_weather']['status'] == 'demo'
+    assert report['telemetry_ai']['live_spacecraft_telemetry'] is False
+    assert report['rocket_simulation']['metrics']['apogee_km'] > 0
+    assert len(report['limitations']) >= 5

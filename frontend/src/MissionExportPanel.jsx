@@ -34,11 +34,12 @@ export default function MissionExportPanel({orbit,telemetry,rocket}){
     try{
       setError('')
       const rows=orbit.points.map(p=>({
+        source:orbit.source,coordinate_frame:orbit.frame,
         time_utc:p.time,altitude_km:p.altitude_km,
         latitude_deg:p.latitude_deg,longitude_deg:p.longitude_deg,
         ecef_x_km:p.ecef_km[0],ecef_y_km:p.ecef_km[1],ecef_z_km:p.ecef_km[2]}))
       downloadBlob('astrasentinel_orbit_approximate.csv',
-        '# '+orbit.source+'; coordinate frame: '+orbit.frame+'\r\n'+toCsv(rows),'text/csv;charset=utf-8')
+        toCsv(rows),'text/csv;charset=utf-8')
     }catch(err){setError(err.message)}
   }
   function exportTelemetry(){
