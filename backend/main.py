@@ -11,6 +11,7 @@ from astrasentinel.ingestion import satellite_elements, space_weather
 from astrasentinel.orbit import current_orbit
 from astrasentinel.rocket import RocketConfig, simulate
 from astrasentinel.telemetry import FEATURES, score_matrix, telemetry_series, evaluation
+from astrasentinel.reporting import build_mission_report
 
 app = FastAPI(
     title="AstraSentinel AI API",
@@ -113,3 +114,13 @@ def atmosphere():
         "points": [{"altitude_km": km, "density_kg_m3": density(km * 1000)}
                    for km in heights_km],
     }
+
+
+@app.get("/api/mission/report")
+def mission_report():
+    """Create a source-attributed snapshot on demand, with no operational safety claims."""
+    try:
+        return build_mission_report(current_orbit(), space_weather(),
+                                    telemetry_series(), simulate())
+    except ValueError as exc:
+        raise HTTPException(502, "Mission report unavailable: " + str(exc)) from exc

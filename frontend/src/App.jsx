@@ -4,12 +4,14 @@ import {Activity,Atom,ChartNoAxesCombined,CloudSun,Cpu,Database,Earth,Gauge,GitB
   Waves,Zap} from 'lucide-react'
 import {CartesianGrid,Line,LineChart,ResponsiveContainer,Tooltip,XAxis,YAxis,Legend,ReferenceLine} from 'recharts'
 import OrbitGlobe from './OrbitGlobe.jsx'
+import AtmospherePage from './AtmospherePage.jsx'
+import MissionExportPanel from './MissionExportPanel.jsx'
 import {api} from './api.js'
 
 const nav=[
   ['overview','Mission Overview',Gauge],['orbit','Orbital Explorer',Orbit],
   ['telemetry','Satellite Health AI',Activity],['weather','Space Weather',CloudSun],
-  ['rocket','Rocket Lab',Rocket],['architecture','System Architecture',GitBranch]]
+  ['rocket','Rocket Lab',Rocket],['atmosphere','Atmosphere Model',CloudSun],['architecture','System Architecture',GitBranch]]
 const colors=['#70efd4','#80adff','#f3ba7c','#b8a9ff']
 function useEndpoint(path,version){
   const [state,set]=useState({data:null,loading:true,error:null})
@@ -81,6 +83,7 @@ function Overview({orbit,weather,tele,rocket,navigate}){
       <p>Maximum dynamic pressure <strong>{rocket?.metrics.max_dynamic_pressure_pa??'—'} Pa</strong></p>
       <p>Trajectory model <strong>1D / variable mass</strong></p></div>
       <button className="link-button" onClick={()=>navigate('rocket')}>Launch simulation laboratory →</button></Panel></div>
+    <MissionExportPanel orbit={orbit} telemetry={tele} rocket={rocket}/>
   </>
 }
 function OrbitPage({state}){
@@ -198,6 +201,7 @@ export default function App(){
   const [page,setPage]=useState('overview'),[refresh,setRefresh]=useState(0)
   const orbit=useEndpoint('/orbit',refresh),weather=useEndpoint('/weather',refresh)
   const tele=useEndpoint('/telemetry',refresh),rocket=useEndpoint('/rocket/demo',refresh)
+  const atmosphere=useEndpoint('/atmosphere',refresh)
   const hasError=[orbit,weather,tele,rocket].some(s=>s.error)
   return <div className="shell"><aside className="sidebar"><div className="brand"><div className="brand-icon"><Orbit size={25}/></div>
     <div><b>ASTRA<span>SENTINEL</span></b><small>MISSION INTELLIGENCE</small></div></div>
@@ -213,7 +217,8 @@ export default function App(){
       {page==='orbit'&&<OrbitPage state={orbit}/>}
       {page==='telemetry'&&<TelemetryPage state={tele}/>}
       {page==='weather'&&<WeatherPage state={weather}/>}
-      {page==='rocket'&&<RocketPage state={rocket}/>}
+      {page==='rocket'&&<RocketPage state={rocket}/>} 
+      {page==='atmosphere'&&<AtmospherePage state={atmosphere}/>}
       {page==='architecture'&&<ArchitecturePage/>}
     </div><footer>ASTRASENTINEL AI © 2026 · EDUCATIONAL DIGITAL TWIN <span>ORBIT ≠ GROUND TRUTH · MODEL SCORE ≠ RISK PROBABILITY</span></footer>
     </main></div>
