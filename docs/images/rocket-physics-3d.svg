@@ -1,0 +1,48 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1400 780" role="img" aria-labelledby="title desc">
+<title id="title">AstraSentinel rocket trajectory and atmospheric drag illustration</title>
+<desc id="desc">A stylized dimensional rocket ascending through atmosphere, altitude layers, thrust and drag arrows, and an educational trajectory plot.</desc>
+<defs><linearGradient id="space" x1="0" y1="0" x2="0" y2="1"><stop stop-color="#060e23"/><stop offset=".55" stop-color="#173f63"/><stop offset="1" stop-color="#266c81"/></linearGradient>
+<linearGradient id="rocket"><stop stop-color="#7293b6"/><stop offset=".25" stop-color="#f2f7ff"/><stop offset=".65" stop-color="#c0d8e9"/><stop offset="1" stop-color="#446986"/></linearGradient>
+<linearGradient id="flame" x1="0" y1="0" x2="0" y2="1"><stop stop-color="#eaffff"/><stop offset=".24" stop-color="#78f5e5"/><stop offset=".58" stop-color="#f7b260"/><stop offset="1" stop-color="#fa613e" stop-opacity="0"/></linearGradient>
+<filter id="blur"><feGaussianBlur stdDeviation="17"/></filter>
+</defs>
+<rect width="1400" height="780" fill="url(#space)"/>
+<path d="M0 570Q400 520 725 577T1400 580V780H0Z" fill="#216879" opacity=".5"/>
+<g stroke="#b5d9ea" stroke-opacity=".18" fill="none"><path d="M0 190H1400M0 310H1400M0 430H1400M0 550H1400"/></g>
+<g font-family="Arial" fill="#83abbc" font-size="15"><text x="1275" y="184">100 KM</text><text x="1275" y="304">75 KM</text><text x="1275" y="424">50 KM</text><text x="1275" y="544">25 KM</text></g>
+<text x="78" y="91" fill="#72f3d8" font-family="Arial" font-size="18" letter-spacing="4">ASTRASENTINEL / FLIGHT PHYSICS</text>
+<text x="78" y="143" fill="#f2fbff" font-family="Arial" font-size="40" font-weight="bold">Vertical Ascent Simulation</text>
+<text x="80" y="178" fill="#afd1e2" font-family="Arial" font-size="17">Variable mass · Gravity · Exponential atmosphere · Quadratic drag</text>
+<g transform="translate(555 210) rotate(16)">
+<ellipse cx="0" cy="420" rx="55" ry="170" fill="#ff9d62" opacity=".25" filter="url(#blur)"/>
+<path d="M-24 265L-9 425Q0 460 12 425L27 265Z" fill="url(#flame)" opacity=".95"/>
+<path d="M-62 168L-101 273L-33 241L-29 172Z" fill="#537f9d" stroke="#a3cee0" stroke-width="3"/>
+<path d="M62 168L101 273L33 241L29 172Z" fill="#346886" stroke="#9fc8da" stroke-width="3"/>
+<rect x="-38" y="13" width="76" height="230" rx="9" fill="url(#rocket)" stroke="#e9ffff" stroke-width="3"/>
+<path d="M-38 20Q-28 -30 0 -82Q29 -30 38 20Z" fill="#f0f7ff" stroke="#d3e8f0" stroke-width="3"/>
+<rect x="-38" y="190" width="76" height="39" fill="#114c68" stroke="#aed3e4" stroke-width="2"/>
+<circle cx="0" cy="71" r="23" fill="#143f65" stroke="#97e3ed" stroke-width="4"/><circle cx="-6" cy="65" r="7" fill="#8de6f3" opacity=".6"/>
+<path d="M-38 120H38" stroke="#68bfc7" stroke-width="5"/>
+</g>
+<path d="M380 658C450 594 470 516 487 438S534 277 574 190" fill="none" stroke="#4dffda" stroke-width="4" stroke-dasharray="13 9"/>
+<path d="M574 190l-29 26 15 9Z" fill="#9bffec"/>
+<path d="M740 297V218" stroke="#e8b582" stroke-width="4"/><path d="M740 213L727 236H753Z" fill="#e8b582"/>
+<text x="759" y="240" fill="#f9cea0" font-family="Arial" font-size="18" font-weight="bold">DRAG · opposing ascent</text>
+<path d="M740 389V489" stroke="#76f2d9" stroke-width="5"/><path d="M740 498L726 471H754Z" fill="#76f2d9"/>
+<text x="761" y="455" fill="#a2fff0" font-family="Arial" font-size="19" font-weight="bold">THRUST · upward force</text>
+<g transform="translate(860 521)">
+<path d="M10 14L35 0H370L345 14Z" fill="#27576e"/>
+<rect x="10" y="14" width="335" height="172" rx="13" fill="#0d2b44" stroke="#4d8795" stroke-width="2"/>
+<text x="35" y="49" fill="#7cf6db" font-size="16" font-family="Arial" letter-spacing="2">TRAJECTORY GRAPH</text>
+<path d="M47 147V69M47 147H312" stroke="#82aabd" stroke-width="2" fill="none"/>
+<path d="M51 143Q97 136 124 114T186 87T245 78T307 76" stroke="#6ce8d3" stroke-width="4" fill="none"/>
+<path d="M51 143Q102 135 148 105T215 99T307 146" stroke="#7eabff" stroke-width="2.5" stroke-dasharray="6 5" fill="none"/>
+<text x="35" y="168" fill="#9fbecf" font-size="12" font-family="Arial">TIME →</text>
+</g>
+<g transform="translate(80 468)"><rect width="300" height="184" rx="16" fill="#0b2b44" stroke="#477789" stroke-width="2"/>
+<text x="22" y="39" fill="#7cecd9" font-family="Arial" font-size="14" letter-spacing="2">MODEL EQUATIONS</text>
+<text x="22" y="84" fill="#e5fcff" font-family="Arial" font-size="19">a = (T − D) / m − g</text>
+<text x="22" y="119" fill="#b6dbea" font-family="Arial" font-size="15">D = ½ ρ Cᵈ A v|v|</text>
+<text x="22" y="151" fill="#b6dbea" font-family="Arial" font-size="15">ρ(h) = ρ₀ exp(−h / H)</text></g>
+<text x="80" y="744" fill="#a0cad6" font-family="Arial" font-size="15">EDUCATIONAL 1D PHYSICS · NOT TO SCALE · NO STAGING, WIND, GUIDANCE OR FLIGHT CERTIFICATION</text>
+</svg>

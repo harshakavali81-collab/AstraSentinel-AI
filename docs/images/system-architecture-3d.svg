@@ -1,0 +1,62 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1460 855" role="img" aria-labelledby="title desc">
+<title id="title">AstraSentinel AI isometric layered system architecture</title>
+<desc id="desc">Five raised three-dimensional service layers connecting public data sources, scientific physics, anomaly AI, FastAPI, and a React mission control frontend.</desc>
+<defs>
+<linearGradient id="bg" x1="0" y1="0" x2="1" y2="1"><stop stop-color="#09243a"/><stop offset="1" stop-color="#050c1a"/></linearGradient>
+<linearGradient id="face"><stop stop-color="#1a5063"/><stop offset="1" stop-color="#113147"/></linearGradient>
+<linearGradient id="top"><stop stop-color="#318ea0"/><stop offset="1" stop-color="#1d587b"/></linearGradient>
+<filter id="shadow"><feGaussianBlur stdDeviation="18"/></filter>
+<pattern id="dot" width="25" height="25" patternUnits="userSpaceOnUse"><circle cx="2" cy="2" r="1" fill="#7de7e0" opacity=".12"/></pattern>
+</defs>
+<rect width="1460" height="855" fill="url(#bg)"/><rect width="1460" height="855" fill="url(#dot)"/>
+<text x="75" y="82" font-family="Arial" font-size="18" letter-spacing="4" fill="#79efdc">ASTRASENTINEL AI / SYSTEM ENGINEERING</text>
+<text x="75" y="136" font-family="Arial" font-size="42" fill="#ecfaff" font-weight="bold">Isometric Digital Twin Architecture</text>
+<text x="75" y="171" font-family="Arial" font-size="18" fill="#a4c2d2">Science, machine learning, and visualization in independently testable layers</text>
+<g transform="translate(500 205)">
+<ellipse cx="240" cy="546" rx="360" ry="66" fill="#32dfd5" opacity=".15" filter="url(#shadow)"/>
+<!-- Each trapezoidal lid and vertical face is hand-drawn for a 3D stacked-module effect. -->
+<g transform="translate(0 405)">
+<path d="M0 58L250 -60L560 58L310 177Z" fill="#20455b" stroke="#67a6bb" stroke-width="2"/>
+<path d="M0 58L310 177V225L0 107Z" fill="#0e2d42"/><path d="M310 177L560 58V107L310 225Z" fill="#123c4f"/>
+<path d="M0 58L250 -60L560 58L310 177Z" fill="url(#top)" fill-opacity=".48"/>
+<text x="240" y="70" fill="#f1ffff" font-family="Arial" font-size="25" font-weight="bold" text-anchor="middle" transform="skewY(1)">REACT + WEBGL CONSOLE</text>
+<text x="246" y="105" fill="#bef5eb" font-family="Arial" font-size="16" text-anchor="middle">3D Globe · Trends · Scenario Lab</text>
+</g>
+<g transform="translate(0 302)">
+<path d="M0 58L250 -60L560 58L310 177Z" fill="#1a5065" stroke="#75d9d1" stroke-width="2"/>
+<path d="M0 58L310 177V219L0 100Z" fill="#13374a"/><path d="M310 177L560 58V100L310 219Z" fill="#0c2b40"/>
+<text x="258" y="74" fill="#edfffb" font-family="Arial" font-size="25" font-weight="bold" text-anchor="middle">FASTAPI SERVICE</text>
+<text x="258" y="103" fill="#b8f2e5" font-family="Arial" font-size="15" text-anchor="middle">HTTP/JSON · Validation · Data Provenance</text>
+</g>
+<g transform="translate(0 199)">
+<path d="M0 58L250 -60L560 58L310 177Z" fill="#1d516b" stroke="#86e8ce" stroke-width="2"/>
+<path d="M0 58L310 177V220L0 100Z" fill="#12344b"/><path d="M310 177L560 58V100L310 220Z" fill="#102b44"/>
+<text x="258" y="72" fill="#fff" font-family="Arial" font-size="25" font-weight="bold" text-anchor="middle">ANOMALY AI ENGINE</text>
+<text x="258" y="105" fill="#beeede" font-family="Arial" font-size="15" text-anchor="middle">Isolation Forest · Synthetic Evaluation</text>
+</g>
+<g transform="translate(0 96)">
+<path d="M0 58L250 -60L560 58L310 177Z" fill="#235f73" stroke="#89e9e3" stroke-width="2"/>
+<path d="M0 58L310 177V221L0 101Z" fill="#14425a"/><path d="M310 177L560 58V101L310 221Z" fill="#0e3044"/>
+<text x="258" y="75" fill="#fff" font-family="Arial" font-size="25" font-weight="bold" text-anchor="middle">ORBIT + ROCKET PHYSICS</text>
+<text x="258" y="103" fill="#d5fff3" font-family="Arial" font-size="15" text-anchor="middle">SGP4 · Atmosphere · Variable Mass</text>
+</g>
+<g transform="translate(0 -7)">
+<path d="M0 58L250 -60L560 58L310 177Z" fill="#34899a" stroke="#a9fff2" stroke-width="3"/>
+<path d="M0 58L310 177V219L0 100Z" fill="#1a5265"/><path d="M310 177L560 58V100L310 219Z" fill="#144157"/>
+<text x="258" y="75" fill="#fff" font-family="Arial" font-size="26" font-weight="bold" text-anchor="middle">PUBLIC DATA INGESTION</text>
+<text x="258" y="107" fill="#e1fff7" font-family="Arial" font-size="15" text-anchor="middle">CelesTrak · NOAA SWPC · Cache</text>
+</g>
+</g>
+<g fill="none" stroke="#7adcd5" stroke-width="2" stroke-dasharray="7 6" opacity=".75">
+<path d="M377 302H300V372H375"/><path d="M1048 403H1127V466H1090"/>
+<path d="M396 597H301V688H382"/></g>
+<g font-family="Arial">
+<rect x="78" y="276" width="292" height="100" rx="15" fill="#113148" stroke="#37677a"/>
+<text x="101" y="312" font-size="15" fill="#7bf0d9" letter-spacing="2">SOURCE QUALITY</text><text x="101" y="345" font-size="17" fill="#e7f8ff">Timestamps · Freshness · Fallbacks</text>
+<rect x="1093" y="426" width="284" height="110" rx="15" fill="#113148" stroke="#37677a"/>
+<text x="1114" y="463" font-size="15" fill="#7bf0d9" letter-spacing="2">EXPLAINABILITY</text><text x="1114" y="493" font-size="17" fill="#e7f8ff">Model metrics · z-score</text><text x="1114" y="517" font-size="15" fill="#a2c5d5">Synthetic measurements</text>
+<rect x="78" y="639" width="293" height="99" rx="15" fill="#113148" stroke="#37677a"/>
+<text x="101" y="676" font-size="15" fill="#7bf0d9" letter-spacing="2">QUALITY GATES</text><text x="101" y="706" font-size="17" fill="#e7f8ff">pytest · GitHub Actions · Docker</text>
+</g>
+<text x="75" y="817" font-family="Arial" font-size="15" fill="#7292a8">ISOMETRIC SERVICE VIEW · ARCHITECTURE DEPICTS SOFTWARE MODULES, NOT HARDWARE OR FLIGHT-CERTIFIED CAPABILITIES</text>
+</svg>

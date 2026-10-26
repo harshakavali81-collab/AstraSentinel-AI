@@ -1,0 +1,62 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1400 790" role="img" aria-labelledby="title desc">
+<title id="title">AstraSentinel AI: three-dimensional orbital digital twin illustration</title>
+<desc id="desc">An illustrated blue Earth, emerald orbital trajectory, satellite and technical orbital telemetry labels. Illustrative, not to scale.</desc>
+<defs>
+<radialGradient id="bg"><stop stop-color="#193956"/><stop offset=".65" stop-color="#08192e"/><stop offset="1" stop-color="#050d1a"/></radialGradient>
+<radialGradient id="earth" cx=".30" cy=".21" r=".82"><stop stop-color="#64adcb"/><stop offset=".23" stop-color="#207894"/><stop offset=".55" stop-color="#134667"/><stop offset=".8" stop-color="#092544"/><stop offset="1" stop-color="#040d20"/></radialGradient>
+<linearGradient id="land" x1="0" y1="0" x2="1" y2="1"><stop stop-color="#75d1b4"/><stop offset=".6" stop-color="#277b7a"/><stop offset="1" stop-color="#145260"/></linearGradient>
+<linearGradient id="panel" x1="0" y1="0" x2="1" y2="1"><stop stop-color="#1c4760"/><stop offset="1" stop-color="#0c233b"/></linearGradient>
+<linearGradient id="orbit" x1="0" y1="0" x2="1" y2="0"><stop stop-color="#2ce2c7"/><stop offset=".5" stop-color="#d8fff6"/><stop offset="1" stop-color="#38ade4"/></linearGradient>
+<filter id="blur"><feGaussianBlur stdDeviation="26"/></filter><filter id="glow"><feGaussianBlur stdDeviation="6"/></filter>
+<pattern id="grid" width="50" height="50" patternUnits="userSpaceOnUse"><path d="M50 0H0V50" stroke="#4ba3c3" stroke-opacity=".085" fill="none"/></pattern>
+<clipPath id="clip-earth"><circle cx="690" cy="405" r="249"/></clipPath>
+</defs>
+<rect width="1400" height="790" fill="url(#bg)"/><rect width="1400" height="790" fill="url(#grid)"/>
+<g fill="#e2fbff" opacity=".55">
+<circle cx="130" cy="118" r="1.6"/><circle cx="279" cy="190" r="2"/><circle cx="1100" cy="148" r="1.7"/><circle cx="1214" cy="600" r="2"/><circle cx="1263" cy="290" r="1.2"/><circle cx="175" cy="665" r="1.3"/><circle cx="970" cy="708" r="1.5"/><circle cx="399" cy="65" r="1.2"/><circle cx="1072" cy="410" r="1.6"/>
+</g>
+<text x="87" y="95" fill="#75f1d9" font-family="Arial,sans-serif" font-size="18" letter-spacing="5">ASTRASENTINEL / ORBITAL INTELLIGENCE</text>
+<text x="88" y="150" fill="#f0faff" font-family="Arial,sans-serif" font-size="41" font-weight="bold">Earth Orbit Digital Twin</text>
+<text x="90" y="183" fill="#a6c4d8" font-family="Arial,sans-serif" font-size="18">SGP4 propagation · Interactive 3D view · Public orbital elements</text>
+<circle cx="690" cy="405" r="275" fill="#28b6df" opacity=".20" filter="url(#blur)"/>
+<circle cx="690" cy="405" r="256" fill="none" stroke="#55c7e7" stroke-width="5" stroke-opacity=".27"/>
+<circle cx="690" cy="405" r="249" fill="url(#earth)"/>
+<g clip-path="url(#clip-earth)" fill="url(#land)" opacity=".87">
+<path d="M510 260L560 212 634 230 651 279 621 315 597 358 538 363 502 333 475 299Z"/>
+<path d="M583 371L624 381 655 419 633 477 598 535 578 497 570 429Z"/>
+<path d="M672 238L719 215 780 233 802 277 756 303 735 346 684 325 656 283Z"/>
+<path d="M713 345L780 328 826 363 820 426 795 495 756 529 717 484 690 412Z"/>
+<path d="M802 276L875 284 937 336 936 383 895 428 858 394 840 332Z"/>
+</g>
+<g clip-path="url(#clip-earth)">
+<path d="M485 335Q650 281 903 355M490 440Q710 395 930 488M518 520Q700 487 853 560" stroke="#d0faff" stroke-opacity=".22" stroke-width="22" fill="none" stroke-linecap="round"/>
+<path d="M475 380Q700 340 929 430" stroke="#ddfbff" stroke-opacity=".18" stroke-width="12" fill="none"/>
+</g>
+<ellipse cx="690" cy="406" rx="470" ry="165" fill="none" stroke="#2af8d6" stroke-width="20" opacity=".12" filter="url(#glow)" transform="rotate(-23 690 406)"/>
+<ellipse cx="690" cy="406" rx="470" ry="165" fill="none" stroke="url(#orbit)" stroke-width="4.2" transform="rotate(-23 690 406)"/>
+<ellipse cx="690" cy="406" rx="425" ry="270" fill="none" stroke="#6aa6fa" stroke-width="1.7" stroke-dasharray="14 10" stroke-opacity=".65" transform="rotate(28 690 406)"/>
+<g transform="translate(1001 236) rotate(-20)">
+<rect x="-29" y="-27" width="58" height="54" rx="8" fill="#d1ebf3" stroke="#ffffff" stroke-width="2"/>
+<path d="M-29 -12H29M-29 9H29" stroke="#7b9dad" stroke-width="2"/>
+<rect x="-130" y="-36" width="95" height="72" fill="#143f7e" stroke="#74e7ef" stroke-width="3"/>
+<rect x="35" y="-36" width="95" height="72" fill="#143f7e" stroke="#74e7ef" stroke-width="3"/>
+<path d="M-110 -36V36M-87 -36V36M-60 -36V36M60 -36V36M87 -36V36M110 -36V36" stroke="#78b2e1" opacity=".6" stroke-width="2"/>
+<path d="M-130 0H-35M35 0H130" stroke="#c7eaff" stroke-width="4"/><circle r="11" fill="#72e6d0"/>
+</g>
+<circle cx="1001" cy="236" r="17" fill="none" stroke="#d5fff2" stroke-width="2" stroke-opacity=".85"/>
+<path d="M1050 228L1120 189H1272" stroke="#85eede" stroke-width="1.5" fill="none"/>
+<text x="1130" y="178" fill="#a5fbec" font-family="Arial" font-size="14" letter-spacing="2">ORBITAL OBJECT</text><text x="1130" y="214" fill="#f3fdff" font-family="Arial" font-size="25" font-weight="bold">ISS / 25544</text>
+<g transform="translate(80 487)"><path d="M0 0L31 -18H250L219 0Z" fill="#2d6582" opacity=".65"/>
+<rect width="220" height="148" rx="13" fill="url(#panel)" stroke="#477a91"/>
+<text x="23" y="33" font-family="Arial" font-size="13" fill="#78eed7" letter-spacing="2">MISSION METRICS</text>
+<text x="23" y="70" font-family="Arial" font-size="12" fill="#b3cedb">ORBITAL PROPAGATOR</text>
+<text x="23" y="94" font-family="Arial" font-size="20" fill="#fff" font-weight="bold">SGP4</text>
+<text x="23" y="121" font-family="Arial" font-size="12" fill="#b3cedb">DATA FRAME  ·  APPROX. ECEF</text></g>
+<g transform="translate(1090 450)"><path d="M0 0L24 -16H245L221 0Z" fill="#2a5f79"/>
+<rect width="221" height="151" rx="13" fill="url(#panel)" stroke="#477a91"/>
+<text x="21" y="34" font-family="Arial" font-size="13" fill="#7feddc" letter-spacing="1.5">TRACEABLE SOURCES</text>
+<text x="21" y="68" font-family="Arial" font-size="21" fill="#fff" font-weight="bold">CelesTrak</text>
+<text x="21" y="92" font-family="Arial" font-size="12" fill="#accbd8">Orbital GP / TLE source</text>
+<text x="21" y="119" font-family="Arial" font-size="12" fill="#accbd8">2-hour source cache</text></g>
+<text x="90" y="734" fill="#7599ad" font-family="Arial" font-size="15">VISUAL CONCEPT ONLY · EARTH COASTLINES STYLIZED · NOT TO SCALE · NOT OPERATIONAL NAVIGATION</text>
+</svg>
