@@ -54,8 +54,8 @@ def parse_tle(text: str) -> tuple[str, str, str]:
     for idx in range(len(lines) - 1):
         if lines[idx].startswith("1 ") and lines[idx + 1].startswith("2 "):
             line1, line2 = lines[idx], lines[idx + 1]
-            if len(line1) < 68 or len(line2) < 68 or line1[2:7] != line2[2:7]
-                    or not valid_tle_checksum(line1) or not valid_tle_checksum(line2):
+            if (len(line1) < 69 or len(line2) < 69 or line1[2:7] != line2[2:7]
+                    or not valid_tle_checksum(line1) or not valid_tle_checksum(line2)):
                 raise ValueError("Malformed or mismatched TLE")
             name = lines[idx - 1] if idx > 0 else "NORAD 25544"
             return name, line1, line2
