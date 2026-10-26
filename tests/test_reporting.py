@@ -1,0 +1,52 @@
+import json
+import csv
+from datetime import datetime, timezone
+import pytest
+
+from astrasentinel.ingestion import satellite_elements, space_weather
+from astrasentinel.orbit import propagate
+from astrasentinel.rocket import simulate
+from astrasentinel.telemetry import telemetry_series
+from astrasentinel.reporting import build_mission_report
+from scripts.generate_demo_artifacts import generate, science_plot_svg
+
+
+def test_report_has_provenance_and_non_operational_disclosure():
+    result = build_mission_report(
+        propagate(satellite_elements(), samples=3), space_weather(),
+        telemetry_series(), simulate(),
+        generated_at=datetime(2024, 3, 7, tzinfo=timezone.utc))
+    assert result["satellite"]["orbit_status"] == "demo"
+    assert result["space_weather"]["status"] == "demo"
+    assert result["telemetry_ai"]["live_spacecraft_telemetry"] is False
+    assert len(result["limitations"]) >= 4
+    assert "not failure probabilities" in " ".join(result["limitations"])
+
+
+def test_empty_series_rejected():
+    with pytest.raises(ValueError):
+        build_mission_report({"points": []}, {}, {"records": []}, {"points": []})
+
+
+def test_report_artifacts_are_reproducible(tmp_path):
+    first = tmp_path / "first"
+    second = tmp_path / "second"
+    a = generate(first)
+    b = generate(second)
+    assert len(a) == len(b) == 5
+    assert [p.name for p in a] == [p.name for p in b]
+    for src, dst in zip(a, b):
+        assert src.read_bytes() == dst.read_bytes(), src.name
+    report = json.loads((first / "mission_snapshot_demo.json").read_text())
+    assert report["mode"] == "educational_research_demonstration"
+    with (first / "orbit_track_demo.csv").open(newline="") as f:
+        assert len(list(csv.DictReader(f))) == 121
+    with (first / "rocket_trajectory_demo.csv").open(newline="") as f:
+        assert len(list(csv.DictReader(f))) > 100
+    assert "<polyline" in (first / "rocket_ascent_demo.svg").read_text()
+
+
+def test_generated_graph_needs_trajectory():
+    with pytest.raises(ValueError):
+        science_plot_svg([{"time_s": 0, "altitude_km": 0}],
+                         "Rocket", "time_s", "altitude_km")
