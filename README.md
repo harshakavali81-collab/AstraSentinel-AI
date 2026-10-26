@@ -1,3 +1,168 @@
-# AstraSentinel AI
+<div align="center">
 
-AI-powered educational space mission digital twin. The complete implementation, interactive 3D dashboard, scientific models, tests, and diagrams are being added to this repository.
+# 🛰️ AstraSentinel AI
+
+### 3D Space Mission Digital Twin · Satellite Anomaly Intelligence · Rocket Physics
+
+**An end-to-end aerospace AI/ML portfolio project: public orbital data + public space-weather observations + seeded telemetry ML + educational rocket simulation.**
+
+[![AstraSentinel CI](https://github.com/harshakavali81-collab/AstraSentinel-AI/actions/workflows/ci.yml/badge.svg)](https://github.com/harshakavali81-collab/AstraSentinel-AI/actions/workflows/ci.yml)
+![Python 3.11](https://img.shields.io/badge/Python-3.11-blue)
+![FastAPI](https://img.shields.io/badge/API-FastAPI-009688)
+![React](https://img.shields.io/badge/Frontend-React%20%2B%20WebGL-61dafb)
+![Purpose](https://img.shields.io/badge/Scope-Educational-orange)
+
+[Quick Start](#-quick-start) | [3D Diagrams](#-project-architecture) | [Project Tree](docs/PROJECT_TREE.md) | [API](docs/API_REFERENCE.md) | [Interview Guide](docs/INTERVIEW_GUIDE.md)
+
+</div>
+
+![3D-style orbital mission illustration](docs/images/orbit-digital-twin.svg)
+
+> **Important:** Orbital elements and geomagnetic readings are fetched from public sources when available. **All satellite health telemetry is synthetic**. The rocket and atmospheric simulators are simplified educational models, **not real-flight design tools**. The globe's geographical shapes are artistic, not a precision Earth map. No NASA, ISRO or SpaceX affiliation or private spacecraft data access is claimed.
+
+## ✅ Implemented features
+
+| Module | Functionality | Disclosure |
+|---|---|---|
+| Satellite data explorer | Fetch ISS (NORAD 25544) public CelesTrak TLE, show provenance | CelesTrak cached for two hours; offline historical demo |
+| Interactive 3D orbit | SGP4 propagation, 121 samples, 3D Earth rotation/zoom, orbital time scrubber | Simplified TEME→ECEF transform |
+| Space-weather observations | NOAA SWPC Kp data, timeline, storm threshold and freshness | Supports 2026 JSON shape, labeled fallback |
+| Satellite Health ML | Seeded telemetry, IsolationForest, artificial fault injection, z-score diagnostics | Synthetic-only training and evaluation |
+| Rocket Lab | 1D variable-mass ascent with gravity, density, thrust and drag | Educational numerical simulation |
+| Mission dashboard | React/Vite, react-three-fiber/Three.js, Recharts, responsive styles | Served via nginx/Docker or Vite |
+| API and verification | FastAPI endpoints, bounded request validation, pytest, GitHub Actions | Offline deterministic tests |
+
+## 🪐 Dashboard screens
+
+1. **Mission Overview** — satellite orbit status, latest Kp value, AI anomaly count, rocket metrics.
+2. **Orbital Explorer** — rotate or zoom Earth, select a timestamp, inspect 3D coordinates and estimated altitude.
+3. **Satellite Health AI** — inspect synthetic anomaly events, evaluated metrics and score custom hypothetical readings.
+4. **Space Weather** — view NOAA Kp trends, storm threshold and actual/demo source status.
+5. **Rocket Lab** — adjust thrust, propellant, mass, atmospheric multiplier and analyze trajectory plots.
+6. **System Architecture** — trace public data, scientific models, REST API, frontend and test coverage.
+
+## 🚀 Quick start
+
+### Docker Compose
+
+Requires Docker Desktop / Docker Engine with Compose.
+
+~~~bash
+git clone https://github.com/harshakavali81-collab/AstraSentinel-AI.git
+cd AstraSentinel-AI
+docker compose up --build
+~~~
+
+**Dashboard:** http://localhost:3000
+
+**Swagger API:** http://localhost:8000/docs
+
+**Backend health:** http://localhost:8000/api/health
+
+### Run directly with Python and Node.js
+
+Requirements: Python 3.11+, Node 22+ and npm.
+
+Terminal 1 (backend):
+
+~~~bash
+python -m venv .venv
+# Windows PowerShell: .venv\Scripts\Activate.ps1
+# Linux/macOS: source .venv/bin/activate
+python -m pip install -e '.[dev]'
+python -m uvicorn backend.main:app --reload
+~~~
+
+Terminal 2 (frontend):
+
+~~~bash
+cd frontend
+npm install
+npm run dev
+~~~
+
+Then open **http://localhost:5173**. Vite proxies API requests to localhost:8000.
+
+For a **network-independent demo**, set ASTRA_OFFLINE=1 in your backend environment. Docker users can change the ASTRA_OFFLINE environment entry in docker-compose.yml from "0" to "1". Offline orbital data are an illustrative 2024 element pair, and weather charts use *synthetic historical example values*; both are clearly labeled.
+
+## 🧪 Run tests and production frontend build
+
+~~~bash
+python -m pip install -e '.[dev]'
+python -m pytest tests -v --cov=astrasentinel --cov-report=term-missing
+cd frontend
+npm install
+npm run build
+~~~
+
+The test fixture forces offline mode. GitHub Actions runs Python tests and a separate React build on every push to main and every pull request. No secret API key is required.
+
+## 🧠 Satellite anomaly model
+
+- **Algorithm:** scikit-learn IsolationForest, 120 estimators, contamination 0.035.
+- **Features:** battery voltage (V), temperature (°C), bus current (A), attitude error (°).
+- **Training:** 1,800 seeded synthetic healthy records, seed 42.
+- **Evaluation:** 420 independently generated observations with controlled artificial deviations.
+- **Metrics:** precision, recall, false alarms and confusion matrix; computed rather than fabricated.
+- **Explanation:** largest standardized input deviation. **Anomaly score is NOT a calibrated risk probability.**
+
+See [Model Card](docs/MODEL_CARD.md).
+
+## 🧮 Core aerospace equations
+
+- **Orbit:** SGP4 on a general-perturbations TLE, with approximate Earth rotation for display.
+- **Atmospheric density:** ρ(h) = ρ₀ exp(−h / H), with H = 8,500 m.
+- **Drag:** F = −½ρ Cᴅ A v|v|.
+- **Gravity:** g(h) = g₀ [Rₑ/(Rₑ+h)]².
+- **Rocket:** acceleration = (thrust + drag)/mass − g(h); semi-implicit Euler time steps.
+
+See [Physics and Numerical Methods](docs/PHYSICS.md).
+
+## 🎨 Project architecture and illustrations
+
+![Original isometric architecture diagram](docs/images/system-architecture-3d.svg)
+
+![Original illustrated rocket physics diagram](docs/images/rocket-physics-3d.svg)
+
+These are project-created editable **SVG vector illustrations**, not photos or screenshots from a real mission.
+
+~~~mermaid
+flowchart TD
+  C[CelesTrak TLE] --> I[Validated cached ingestion]
+  N[NOAA SWPC Kp] --> I
+  I --> O[SGP4 orbit model]
+  I --> W[Kp normalization]
+  S[Seeded synthetic telemetry] --> M[Isolation Forest]
+  A[Exponential atmosphere] --> R[Variable-mass rocket simulation]
+  O --> API[FastAPI REST layer]
+  W --> API
+  M --> API
+  R --> API
+  API --> UI[React dashboard]
+  UI --> G[Three.js 3D Earth]
+  UI --> P[Recharts plots]
+  T[pytest + CI] -. verifies .-> API
+~~~
+
+## 📚 Project documentation bookmarks
+
+| Resource | What it includes |
+|---|---|
+| [Full Project Structure](docs/PROJECT_TREE.md) | Actual repository folder tree and responsibilities |
+| [Architecture](docs/ARCHITECTURE.md) | System layers, Mermaid sequence and module boundaries |
+| [Data Sources](docs/DATA_SOURCES.md) | CelesTrak, NOAA, source formatting and freshness |
+| [Physics](docs/PHYSICS.md) | SGP4 frames, gravity, atmosphere, rocket integrator |
+| [Model Card](docs/MODEL_CARD.md) | Training, synthetic evaluation and interpretability |
+| [API Reference](docs/API_REFERENCE.md) | All REST endpoints and sample requests |
+| [Demo Guide](docs/DEMO_GUIDE.md) | Installation, six-screen walkthrough |
+| [Test Plan](docs/TEST_PLAN.md) | Repeatable test strategy and scientific validation gaps |
+| [Limitations](docs/LIMITATIONS.md) | Data caveats, hosting and safety limitations |
+| [Interview Guide](docs/INTERVIEW_GUIDE.md) | Job-project explanation and resume bullets |
+
+## 🌐 External data acknowledgements
+
+[CelesTrak General Perturbations Documentation](https://celestrak.org/NORAD/documentation/gp-data-formats.php) · [CelesTrak Usage Policy](https://celestrak.org/usage-policy.php) · [NOAA SWPC Kp Data](https://services.swpc.noaa.gov/products/noaa-planetary-k-index.json)
+
+This source repository represents a **working local educational prototype**, not a deployed hosted product or professionally certified aerospace application.
+
+**License:** [MIT](LICENSE).
