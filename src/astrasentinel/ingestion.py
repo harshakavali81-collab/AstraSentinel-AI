@@ -16,8 +16,8 @@ TLE_URL = "https://celestrak.org/NORAD/elements/gp.php?CATNR=25544&FORMAT=TLE"
 KP_URL = "https://services.swpc.noaa.gov/products/noaa-planetary-k-index.json"
 DEMO_TLE = (
     "ISS (ZARYA)",
-    "1 25544U 98067A   24067.51782528  .00016688  00000+0  30549-3 0  9996",
-    "2 25544  51.6402  18.3614 0005489 293.6311 186.4045 15.50038627442753",
+    "1 25544U 98067A   24067.51782528  .00016688  00000+0  30549-3 0  9999",
+    "2 25544  51.6402  18.3614 0005489 293.6311 186.4045 15.50038627442751",
 )
 _cache: dict[str, tuple[float, Any]] = {}
 
@@ -42,12 +42,20 @@ def cached_json_or_text(url: str, ttl: int, parse_json: bool = False) -> Any:
         raise
 
 
+def valid_tle_checksum(line: str) -> bool:
+    """Classic TLE modulo-10 checksum: digits plus minus signs, excluding the last digit."""
+    return (len(line) == 69 and line[-1].isdigit()
+            and (sum(int(c) for c in line[:-1] if c.isdigit())
+                 + line[:-1].count("-")) % 10 == int(line[-1]))
+
+
 def parse_tle(text: str) -> tuple[str, str, str]:
     lines = [line.strip() for line in text.splitlines() if line.strip()]
     for idx in range(len(lines) - 1):
         if lines[idx].startswith("1 ") and lines[idx + 1].startswith("2 "):
             line1, line2 = lines[idx], lines[idx + 1]
-            if len(line1) < 68 or len(line2) < 68 or line1[2:7] != line2[2:7]:
+            if len(line1) < 68 or len(line2) < 68 or line1[2:7] != line2[2:7]
+                    or not valid_tle_checksum(line1) or not valid_tle_checksum(line2):
                 raise ValueError("Malformed or mismatched TLE")
             name = lines[idx - 1] if idx > 0 else "NORAD 25544"
             return name, line1, line2

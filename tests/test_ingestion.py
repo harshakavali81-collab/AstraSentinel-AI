@@ -29,3 +29,13 @@ def test_offline_weather_is_transparently_labeled():
     assert result['status'] == 'demo'
     assert result['source'] == 'synthetic_historical_demo'
     assert len(result['points']) > 10
+
+def test_tle_checksum_validated():
+    from astrasentinel.ingestion import valid_tle_checksum
+    entry = satellite_elements()
+    assert valid_tle_checksum(entry["line1"])
+    assert valid_tle_checksum(entry["line2"])
+    bad = entry["line1"][:-1] + "0"
+    assert not valid_tle_checksum(bad)
+    with pytest.raises(ValueError):
+        parse_tle("\n".join([entry["name"], bad, entry["line2"]]))
