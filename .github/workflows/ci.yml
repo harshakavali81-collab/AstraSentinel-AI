@@ -1,0 +1,39 @@
+name: AstraSentinel CI
+
+on:
+  push:
+    branches: [main]
+  pull_request:
+  workflow_dispatch:
+
+jobs:
+  python-tests:
+    runs-on: ubuntu-latest
+    timeout-minutes: 15
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-python@v5
+        with:
+          python-version: '3.11'
+          cache: pip
+      - name: Install scientific and testing dependencies
+        run: python -m pip install -e '.[dev]'
+      - name: Run deterministic offline test suite
+        env:
+          ASTRA_OFFLINE: '1'
+        run: python -m pytest tests -v --cov=astrasentinel --cov-report=term-missing
+  frontend-build:
+    runs-on: ubuntu-latest
+    timeout-minutes: 15
+    defaults:
+      run:
+        working-directory: frontend
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-node@v4
+        with:
+          node-version: '22'
+      - name: Install pinned frontend dependencies
+        run: npm install --no-audit --no-fund
+      - name: Build production dashboard
+        run: npm run build
