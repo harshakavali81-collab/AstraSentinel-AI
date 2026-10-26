@@ -48,3 +48,52 @@ jobs:
         run: npm install --no-audit --no-fund
       - name: Build production dashboard
         run: npm run build
+
+  full-stack-smoke:
+    runs-on: ubuntu-latest
+    timeout-minutes: 25
+    steps:
+      - uses: actions/checkout@v4
+      - name: Build and start the complete app using Docker
+        env:
+          ASTRA_OFFLINE: '1'
+        run: docker compose up --build --detach
+      - name: Smoke-test running backend, reverse-proxied frontend and scientific endpoints
+        run: |
+          set -eu
+          ready=0
+          for attempt in $(seq 1 65); do
+            if curl --silent --fail http://localhost:8000/api/health >/dev/null &&
+               curl --silent --fail http://localhost:3000/ >/dev/null; then
+              ready=1
+              break
+            fi
+            sleep 2
+          done
+          test "$ready" -eq 1
+          curl --silent --fail http://localhost:3000/ | grep -q "AstraSentinel AI"
+          python3 - <<'PY'
+          import json, urllib.request
+          def get(path):
+              with urllib.request.urlopen('http://localhost:3000'+path, timeout=30) as response:
+                  return json.load(response)
+          assert get('/api/health')['ok']
+          orbit = get('/api/orbit')
+          weather = get('/api/weather')
+          model = get('/api/model/evaluation')
+          rocket = get('/api/rocket/demo')
+          report = get('/api/mission/report')
+          assert len(orbit['points']) == 121
+          assert orbit['status'] == 'demo'
+          assert weather['status'] == 'demo'
+          assert model['label_source'] == 'controlled_synthetic_injections'
+          assert rocket['metrics']['apogee_km'] > 0
+          assert report['telemetry_ai']['live_spacecraft_telemetry'] is False
+          print('Complete offline container smoke-test passed.')
+          PY
+      - name: Dump application logs on failure
+        if: failure()
+        run: docker compose logs --no-color --tail=150
+      - name: Stop test containers
+        if: always()
+        run: docker compose down --remove-orphans

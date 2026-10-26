@@ -36,3 +36,19 @@ Windows PowerShell can use the same pytest command since the fixture forces ASTR
 ## Future gates
 
 Introduce numerical reference vectors, convergence tests, simulated extreme-altitude cases, mock upstream failures and source rate-limit tests, full browser interaction tests, hosting security scans, training-data drift checks and external domain review before claiming a stronger validation standard.
+
+
+## Docker Compose full-stack smoke verification
+
+The CI workflow also builds the backend Python container and production React/nginx container with Docker Compose, starts them in offline demo mode, and requests both services via HTTP. It asserts that the dashboard HTML loads, nginx reverse-proxies backend routes, and orbit, NOAA demo, AI model evaluation, rocket, and mission JSON report endpoints return valid structured data. Containers are shut down even if the check fails.
+
+Run the same scenario locally:
+
+~~~bash
+ASTRA_OFFLINE=1 docker compose up --build -d
+curl http://localhost:3000/api/health
+curl http://localhost:3000/api/mission/report
+docker compose down
+~~~
+
+Windows PowerShell: run $env:ASTRA_OFFLINE="1" first, then docker compose up --build -d. The smoke test proves service integration and offline endpoint behavior, **not** accuracy on true spacecraft data or cross-browser visual rendering.

@@ -86,7 +86,7 @@ npm run dev
 
 Then open **http://localhost:5173**. Vite proxies API requests to localhost:8000.
 
-For a **network-independent demo**, set ASTRA_OFFLINE=1 in your backend environment. Docker users can change the ASTRA_OFFLINE environment entry in docker-compose.yml from "0" to "1". Offline orbital data are an illustrative 2024 element pair, and weather charts use *synthetic historical example values*; both are clearly labeled.
+For a **network-independent demo**, set ASTRA_OFFLINE=1 in your backend environment. Docker users can run **ASTRA_OFFLINE=1 docker compose up --build** (PowerShell: set **$env:ASTRA_OFFLINE="1"** first) to enable deterministic offline simulation. Offline orbital data are an illustrative 2024 element pair, and weather charts use *synthetic historical example values*; both are clearly labeled.
 
 ## 🧪 Run tests and production frontend build
 
@@ -106,7 +106,7 @@ python -m scripts.generate_demo_artifacts --output artifacts/reports
 
 Download the generated samples from a successful [GitHub Actions workflow run](https://github.com/harshakavali81-collab/AstraSentinel-AI/actions/workflows/ci.yml) under the artifact named **astrasentinel-scientific-demo**.
 
-The test fixture forces offline mode. GitHub Actions runs Python tests and a separate React build on every push to main and every pull request. No secret API key is required.
+The test fixture forces offline mode. GitHub Actions runs Python tests and a separate React build on every push to main and every pull request, with a **full Docker Compose smoke test** that boots the frontend and backend together and verifies working science routes. No secret API key is required.
 
 ## 🧠 Satellite anomaly model
 

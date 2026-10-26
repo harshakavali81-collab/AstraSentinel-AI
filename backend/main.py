@@ -4,7 +4,7 @@ from __future__ import annotations
 from dataclasses import fields
 from fastapi import FastAPI, HTTPException
 from fastapi.middleware.cors import CORSMiddleware
-from pydantic import BaseModel, Field
+from pydantic import BaseModel, Field, ConfigDict
 
 from astrasentinel.atmosphere import density
 from astrasentinel.ingestion import satellite_elements, space_weather
@@ -24,6 +24,8 @@ app.add_middleware(CORSMiddleware, allow_origins=["http://localhost:5173",
 
 
 class RocketRequest(BaseModel):
+    model_config = ConfigDict(extra='forbid', allow_inf_nan=False)
+
     dry_mass_kg: float = 480
     propellant_kg: float = 900
     thrust_n: float = 30000
@@ -36,6 +38,8 @@ class RocketRequest(BaseModel):
 
 
 class TelemetryRequest(BaseModel):
+    model_config = ConfigDict(extra='forbid', allow_inf_nan=False)
+
     battery_voltage_v: float = Field(ge=0, le=100)
     temperature_c: float = Field(ge=-150, le=250)
     bus_current_a: float = Field(ge=0, le=100)

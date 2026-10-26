@@ -23,3 +23,8 @@ This is an **educational software research demonstrator**, not an operational or
 - Deploy through a controlled provider and clearly distinguish simulation mode from public live-source mode.
 
 See [System Architecture](ARCHITECTURE.md), [Data Sources](DATA_SOURCES.md) and [Testing](TEST_PLAN.md).
+
+
+## Integration testing boundary
+
+GitHub Actions additionally runs a full-stack Docker Compose integration smoke test and verifies API routes through the nginx frontend container. This checks that local service composition and proxying work; it is not a load, security, hardware/WebGL or production deployment validation.
