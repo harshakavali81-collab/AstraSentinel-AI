@@ -12,13 +12,34 @@
 ![React](https://img.shields.io/badge/Frontend-React%20%2B%20WebGL-61dafb)
 ![Purpose](https://img.shields.io/badge/Scope-Educational-orange)
 
-[Quick Start](#-quick-start) | [3D Diagrams](#-project-architecture) | [Project Tree](docs/PROJECT_TREE.md) | [API](docs/API_REFERENCE.md) | [Interview Guide](docs/INTERVIEW_GUIDE.md)
+[Visual Gallery](docs/VISUAL_GALLERY.md) | [Quick Start](#-quick-start) | [3D Diagrams](#-project-architecture) | [Project Tree](docs/PROJECT_TREE.md) | [API](docs/API_REFERENCE.md) | [Interview Guide](docs/INTERVIEW_GUIDE.md)
 
 </div>
 
-![3D-style orbital mission illustration](docs/images/orbit-digital-twin.svg)
+![AstraSentinel AI original panoramic space mission banner](docs/gallery/astrasentinel-banner.svg)
 
 > **Important:** Orbital elements and geomagnetic readings are fetched from public sources when available. **All satellite health telemetry is synthetic**. The rocket and atmospheric simulators are simplified educational models, **not real-flight design tools**. The globe's geographical shapes are artistic, not a precision Earth map. No NASA, ISRO or SpaceX affiliation or private spacecraft data access is claimed.
+
+## 🎨 Space Mission Visual Gallery
+
+**Eight original, editable SVG pictures and graphs**, committed directly to this GitHub repository. Conceptual graphics are not real flight data or screenshots of an operational mission.
+
+| 3D Orbital Science | Satellite Health AI |
+|:---:|:---:|
+| [![Orbital diagram](docs/gallery/orbital-geometry.svg)](docs/gallery/orbital-geometry.svg) | [![AI telemetry visualization](docs/gallery/satellite-health-intelligence.svg)](docs/gallery/satellite-health-intelligence.svg) |
+| [Orbital geometry](docs/gallery/orbital-geometry.svg) | [Anomaly detection illustration](docs/gallery/satellite-health-intelligence.svg) |
+
+| Space Weather | Rocket Trajectory Graph |
+|:---:|:---:|
+| [![Solar weather illustration](docs/gallery/space-weather-observatory.svg)](docs/gallery/space-weather-observatory.svg) | [![Rocket analysis curves](docs/gallery/rocket-flight-analysis.svg)](docs/gallery/rocket-flight-analysis.svg) |
+| [Sun and Kp example](docs/gallery/space-weather-observatory.svg) | [Numerical rocket simulation](docs/gallery/rocket-flight-analysis.svg) |
+
+| Earth's Atmospheric Layers | Mission Control Design |
+|:---:|:---:|
+| [![Atmospheric science](docs/gallery/atmospheric-layers.svg)](docs/gallery/atmospheric-layers.svg) | [![Mission control interface concept](docs/gallery/mission-control-ui-concept.svg)](docs/gallery/mission-control-ui-concept.svg) |
+| [Atmospheric density](docs/gallery/atmospheric-layers.svg) | [Dashboard visual concept](docs/gallery/mission-control-ui-concept.svg) |
+
+[**Explore all eight images, scientific graphs, and image explanations →**](docs/VISUAL_GALLERY.md)
 
 ## ✅ Implemented features
 

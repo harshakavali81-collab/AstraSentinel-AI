@@ -46,6 +46,16 @@ AstraSentinel-AI/
 │   └── test_reporting.py
 │   └── test_api.py
 ├── docs/
+│   ├── gallery/
+│   │   ├── astrasentinel-banner.svg
+│   │   ├── orbital-geometry.svg
+│   │   ├── satellite-health-intelligence.svg
+│   │   ├── space-weather-observatory.svg
+│   │   ├── rocket-flight-analysis.svg
+│   │   ├── atmospheric-layers.svg
+│   │   ├── scientific-graphs.svg
+│   │   └── mission-control-ui-concept.svg
+│   ├── VISUAL_GALLERY.md
 │   ├── images/
 │   │   ├── orbit-digital-twin.svg
 │   │   ├── system-architecture-3d.svg
