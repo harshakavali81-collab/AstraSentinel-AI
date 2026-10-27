@@ -119,7 +119,7 @@ npm install
 npm run build
 ~~~
 
-Generate deterministic **JSON + CSV + SVG** scientific reports:
+Generate **13 deterministic artifacts** (JSON + CSV + nine different scientific SVG graphs + three CSV datasets):
 
 ~~~bash
 python -m scripts.generate_demo_artifacts --output artifacts/reports

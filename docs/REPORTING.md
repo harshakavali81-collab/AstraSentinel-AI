@@ -15,7 +15,7 @@ Prerequisite: install project dependencies with pip install -e '.[dev]' from the
 python -m scripts.generate_demo_artifacts --output artifacts/reports
 ~~~
 
-The command produces five files:
+The command produces **13 reproducible offline files**:
 
 | Output | Contents |
 |---|---|
@@ -24,6 +24,14 @@ The command produces five files:
 | satellite_telemetry_demo.csv | Synthetic sensor readings, injected labels, anomaly scores and explanations |
 | rocket_trajectory_demo.csv | Numerical rocket altitude, velocity, acceleration, mass and dynamic pressure across time |
 | rocket_ascent_demo.svg | Original data-driven vector graph of the simulated rocket altitude curve |
+| orbit_altitude_demo.svg | Historical demo orbit's estimated altitude across the sampled period |
+| orbit_latitude_demo.svg | Historical demo orbit's approximate latitude sweep |
+| space_weather_kp_demo.svg | Synthetic historical Kp index series; **not** current NOAA observations |
+| telemetry_temperature_demo.svg | Seeded synthetic subsystem temperature time series |
+| telemetry_voltage_demo.svg | Seeded synthetic battery-voltage time series |
+| rocket_velocity_demo.svg | Vertical velocity computed by the 1D educational integrator |
+| rocket_dynamic_pressure_demo.svg | Dynamic pressure computed from the 1D rocket and exponential atmosphere |
+| atmosphere_density_demo.svg | Exponential air density at 0–100 km, not a standard atmosphere |
 
 ![Example 3D-style rocket physics](images/rocket-physics-3d.svg)
 

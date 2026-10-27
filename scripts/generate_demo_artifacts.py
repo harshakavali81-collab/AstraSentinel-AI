@@ -1,4 +1,4 @@
-"""Generate reproducible, network-free machine-readable reports and an original plot.
+"""Generate reproducible, network-free machine-readable reports and scientific graphs.
 
 Usage:
     python -m scripts.generate_demo_artifacts --output artifacts/reports
@@ -18,6 +18,7 @@ from astrasentinel.ingestion import satellite_elements, space_weather
 from astrasentinel.orbit import propagate
 from astrasentinel.telemetry import telemetry_series
 from astrasentinel.rocket import simulate
+from astrasentinel.atmosphere import density
 from astrasentinel.reporting import build_mission_report
 
 
@@ -97,6 +98,46 @@ def generate(output: Path) -> list[Path]:
             rocket["points"], "Rocket vertical ascent", "time_s", "altitude_km",
         ),
     }
+    # Scientific graphs below use the actual deterministic offline calculations,
+    # unlike the design-concept SVG art shown in docs/gallery/.
+    orbit_points = [
+        {"minute": i * (96 / (len(orbit["points"]) - 1)),
+         "altitude_km": p["altitude_km"],
+         "latitude_deg": p["latitude_deg"]}
+        for i, p in enumerate(orbit["points"])
+    ]
+    kp_points = [
+        {"elapsed_hours": 3 * i, "kp": p["kp"]}
+        for i, p in enumerate(weather["points"])
+    ]
+    telemetry_points = [
+        {"sample_index": i,
+         "temperature_c": p["measurements"]["temperature_c"],
+         "battery_voltage_v": p["measurements"]["battery_voltage_v"]}
+        for i, p in enumerate(tele["records"])
+    ]
+    atmospheric_points = [
+        {"altitude_km": km, "density_kg_m3": density(km * 1000)}
+        for km in range(0, 101, 2)
+    ]
+    files.update({
+        "orbit_altitude_demo.svg": science_plot_svg(
+            orbit_points, "Historical ISS orbit altitude", "minute", "altitude_km"),
+        "orbit_latitude_demo.svg": science_plot_svg(
+            orbit_points, "Historical ISS latitude estimate", "minute", "latitude_deg"),
+        "space_weather_kp_demo.svg": science_plot_svg(
+            kp_points, "Synthetic historical geomagnetic Kp", "elapsed_hours", "kp"),
+        "telemetry_temperature_demo.svg": science_plot_svg(
+            telemetry_points, "Synthetic satellite temperature", "sample_index", "temperature_c"),
+        "telemetry_voltage_demo.svg": science_plot_svg(
+            telemetry_points, "Synthetic battery voltage", "sample_index", "battery_voltage_v"),
+        "rocket_velocity_demo.svg": science_plot_svg(
+            rocket["points"], "Educational vertical rocket velocity", "time_s", "velocity_m_s"),
+        "rocket_dynamic_pressure_demo.svg": science_plot_svg(
+            rocket["points"], "Educational dynamic pressure", "time_s", "dynamic_pressure_pa"),
+        "atmosphere_density_demo.svg": science_plot_svg(
+            atmospheric_points, "Exponential atmospheric density", "altitude_km", "density_kg_m3"),
+    })
     for name, content in files.items():
         (output / name).write_text(content, encoding="utf-8")
     save_csv(output / "rocket_trajectory_demo.csv", rocket["points"])
