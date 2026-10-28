@@ -26,7 +26,7 @@ The project now includes a **mobile-responsive, GitHub Pages-ready showcase**, w
 
 - [Website source](docs/index.html) · [Stylesheet](docs/landing.css) · [Hosting instructions](docs/DEPLOYMENT.md)
 - Preview locally from the repository root: `python -m http.server 8080 --directory docs`, then open http://localhost:8080.
-- To publish publicly, enable **GitHub Pages** in Settings → Pages and select branch **main**, folder **/docs**. This website is not live until hosting is enabled and verified.
+- To publish publicly, enable **GitHub Pages** in Settings → Pages and select **GitHub Actions** as the publishing source and run [AstraSentinel Static Portfolio Pages](.github/workflows/pages.yml). This website is not live until hosting is enabled and verified.
 - The separate interactive React/FastAPI dashboard still requires a full-stack host. GitHub Pages **cannot** run the Python backend.
 
 ## 🎨 Space Mission Visual Gallery
@@ -95,6 +95,18 @@ docker compose up --build
 **Backend health:** http://localhost:8000/api/health
 
 **Private backend staging:** Use the dedicated docker-compose.private.yml file with ASTRA_OFFLINE=1 to bind the frontend only on 127.0.0.1:3000 and keep the backend private. See [deployment security guidance](docs/DEPLOYMENT.md). A trusted authenticated HTTPS edge is still required before any public deployment.
+
+### One-container deployable web app
+
+The complete **React mission dashboard and Python FastAPI API** can now run from a single image, using [Dockerfile.standalone](Dockerfile.standalone) and [backend/standalone.py](backend/standalone.py). This removes the requirement for a two-service Docker deployment on hosting providers.
+
+~~~bash
+docker compose -f docker-compose.standalone.yml up --build
+~~~
+
+Open **http://localhost:8080** for the real React dashboard and **http://localhost:8080/docs** for the actual Python API. The standalone demo defaults to historically labeled offline orbital/weather sources and synthetic satellite telemetry. It runs the original simulation and ML code, not mocked API responses.
+
+Deployment manifests: [Render Blueprint](render.yaml) | [Railway configuration](railway.json) | [Hosting guide](docs/DEPLOYMENT.md). Connecting your own hosting account and configuring a protected HTTPS deployment is still required before sharing an Internet URL. Static GitHub Pages does not run Python.
 
 ### Run directly with Python and Node.js
 

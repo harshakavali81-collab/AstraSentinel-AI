@@ -28,3 +28,8 @@ See [System Architecture](ARCHITECTURE.md), [Data Sources](DATA_SOURCES.md) and 
 ## Integration testing boundary
 
 GitHub Actions additionally runs a full-stack Docker Compose integration smoke test and verifies API routes through the nginx frontend container. This checks that local service composition and proxying work; it is not a load, security, hardware/WebGL or production deployment validation.
+
+
+## Standalone hosting caveat
+
+A combined React/FastAPI Docker image and optional provider manifests are included for easy deployment, but **a manifest alone is not a deployed website**. The image has no built-in multiuser authentication or edge rate limiting. A live Internet URL requires an authenticated host connection, trusted HTTPS, traffic controls, and a validated deployment. GitHub Pages, when enabled, publishes only the static portfolio showcase, not the computational backend.

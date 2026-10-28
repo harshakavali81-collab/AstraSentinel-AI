@@ -23,11 +23,13 @@ Open http://localhost:8080/. All image links are relative and work without API c
 
 This repository includes a complete Pages-ready docs/index.html but **the owner must enable Pages on GitHub**. Publishing cannot be assumed from committing the code.
 
-1. Open your repository's **Settings → Pages**.
-2. Under **Build and deployment**, choose **Deploy from a branch**.
-3. Select branch **main**, folder **/docs**, then Save.
-4. Check the **Pages** section for the URL assigned by GitHub; confirm the actual page loads before sharing it with recruiters.
-5. The site is public. It shows *portfolio content only*, not live backend APIs. Do not describe it as an interactive deployed mission console.
+1. Open the repository's **Settings → Pages**.
+2. Set **Build and deployment → Source → GitHub Actions**. This enables Pages publishing for the repository.
+3. Open **Actions → AstraSentinel Static Portfolio Pages**, select **Run workflow** on `main`. Its [workflow source](../.github/workflows/pages.yml) uploads `docs/` and deploys it. Future changes under `docs/` trigger automatic publication.
+4. In **Settings → Pages**, copy the actual deployed URL **only after** the Pages workflow succeeds and the page opens.
+5. This hosted site is a responsive portfolio **showcase only**; it does not provide a running Python API. Do not represent it as the live mission dashboard.
+
+The deployment workflow checks Pages enablement first and skips publication if Pages has not been turned on. A source commit cannot enable Pages with the default GitHub Actions token; repository settings still require the owner's action.
 
 If GitHub Pages is unavailable on your account or repository plan, preview via the local command above or deploy the docs directory to another static hosting platform.
 
@@ -50,6 +52,21 @@ Command: ASTRA_OFFLINE=1 docker compose -f docker-compose.private.yml up --build
 Connect locally to http://localhost:3000, or front it with your **own secure authenticated HTTPS gateway**. This is **not** a complete public-production deployment: user authentication, quotas, traffic security, monitoring, storage policy and abuse prevention remain necessary.
 
 nginx now includes basic browser security headers, a request-body cap, and a moderate request rate limit. This is defense in depth, not a guarantee of safety. The default development Compose still exposes backend port 8000 for local debugging; do not deploy that profile directly to a public IP.
+
+## 3b. Single-container React + FastAPI application
+
+The full React mission console **and** Python API can now be hosted together using [Dockerfile.standalone](../Dockerfile.standalone). This two-stage image compiles the React frontend once, installs the Python science package, and mounts the compiled assets through [backend/standalone.py](../backend/standalone.py) *after* the API routes.
+
+~~~bash
+docker compose -f docker-compose.standalone.yml up --build -d
+curl http://127.0.0.1:8080/api/health
+~~~
+
+Open http://localhost:8080 for the **working React mission dashboard** and http://localhost:8080/docs for Swagger. This version defaults to `ASTRA_OFFLINE=1`, so it makes **no live science-source calls** and is reproducible for interviews. The browser still performs actual FastAPI requests for orbital/ML/simulation functions.
+
+Hosting configurations included: [Render](../render.yaml) and [Railway](../railway.json). They point to the one-image Dockerfile and health-check endpoint. A provider account, deployment permission and platform setup are required to produce a real public URL. Most hosts assign a `PORT` environment variable, and the container uses it automatically.
+
+**Important security boundary:** The standalone Python container does not pass through the nginx rate limits and browser headers of the two-container version. It is not a production-hardened public service by itself. Configure a trusted HTTPS proxy, request limits, access controls, logging and abuse protection **outside** the image before exposing it publicly. Keep the default demo data source mode when demonstrating to recruiters.
 
 ### Deterministic offline demonstration
 
@@ -94,6 +111,6 @@ npm install
 npm run build
 ~~~
 
-The existing GitHub Actions workflow runs Python tests, builds the frontend, boots the Docker stack and probes scientific endpoints, including the scenario comparison endpoint.
+GitHub Actions runs Python scientific tests, builds the frontend, checks the two-service Docker stack with real Chromium, and **also builds/smoke-tests the new single-container image** at port 8080. Successful runs publish a `astrasentinel-static-website` artifact ready for upload, alongside generated scientific graphs and actual dashboard screenshots.
 
 **Scope statement:** Neither the static portfolio nor the interactive prototype is an operational satellite flight system, meteorological alert service, collision prediction system or certified rocket simulator.

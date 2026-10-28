@@ -98,3 +98,8 @@ The Orbital Explorer includes a 2D equirectangular latitude/longitude chart usin
 Rocket comparison lines are interpolated onto a common time axis by scenarioCurves.js to avoid broken charts from different simulation end times. They are not extrapolated after the underlying trajectory ends. Node tests cover interpolation and map geometry.
 
 Playwright Chromium end-to-end checks run against the Docker-integrated app in deterministic offline mode and export real dashboard screenshots, covering navigation, scenario computation, input validation and CSV export.
+
+
+## Single-image application deployment
+
+The independent `backend/main.py` service remains the foundation for development and two-container Docker Compose. [backend/standalone.py](../backend/standalone.py) imports the same FastAPI app and **mounts the Vite-built static React bundle last**, so existing `/api/*`, `/docs` and OpenAPI routes remain authoritative. [Dockerfile.standalone](../Dockerfile.standalone) uses a Node build stage and a smaller Python runtime stage; the result can run on a single-container host. The new `standalone-container` CI job verifies that static and JSON routes work from one port. Authentication, rate limits, and HTTPS must be applied externally for any public deployment.

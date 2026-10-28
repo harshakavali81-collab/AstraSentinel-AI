@@ -6,11 +6,13 @@
 AstraSentinel-AI/
 ├── .github/
 │   └── workflows/
-│       └── ci.yml                 Python and frontend CI
+│       ├── ci.yml                 Python, browser and standalone container CI
+│       └── pages.yml              Pages publishing only after owner enablement
 ├── backend/
 │   ├── __init__.py
 │   ├── Dockerfile
-│   └── main.py                    FastAPI application
+│   ├── main.py                    FastAPI application
+│   └── standalone.py              Mounts compiled React assets after API routes
 ├── src/
 │   └── astrasentinel/
 │       ├── __init__.py
@@ -52,6 +54,7 @@ AstraSentinel-AI/
 │   ├── conftest.py                No-network fixture
 │   ├── test_ingestion.py
 │   ├── test_orbit.py
+│   ├── test_standalone_contract.py
 │   ├── test_security_contracts.py
 │   ├── test_portfolio_site.py
 │   ├── test_gallery.py
@@ -98,6 +101,10 @@ AstraSentinel-AI/
 ├── .gitignore
 ├── docker-compose.yml
 ├── docker-compose.private.yml    Private-backend loopback staging
+├── docker-compose.standalone.yml Single deployable container on 127.0.0.1:8080
+├── Dockerfile.standalone        React+Python one-image production build
+├── render.yaml                 Optional Render deployment manifest
+├── railway.json                Optional Railway deployment manifest
 ├── LICENSE
 ├── pyproject.toml
 └── README.md
