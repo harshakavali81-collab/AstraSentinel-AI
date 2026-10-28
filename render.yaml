@@ -9,3 +9,9 @@ services:
     envVars:
       - key: ASTRA_OFFLINE
         value: "1"
+      - key: ASTRA_DEMO_AUTH
+        value: "1"
+      - key: ASTRA_DEMO_USER
+        sync: false
+      - key: ASTRA_DEMO_PASSWORD
+        sync: false

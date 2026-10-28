@@ -11,6 +11,7 @@ export default defineRailway(() => {
     healthcheckTimeout: 120,
     env: {
       ASTRA_OFFLINE: "1",
+      ASTRA_DEMO_AUTH: "1",
       RAILWAY_DOCKERFILE_PATH: "Dockerfile.standalone",
     },
   });

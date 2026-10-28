@@ -4,5 +4,8 @@ services:
     build: {context: ., dockerfile: Dockerfile.standalone}
     environment:
       ASTRA_OFFLINE: ${ASTRA_OFFLINE:-1}
+      ASTRA_DEMO_AUTH: ${ASTRA_DEMO_AUTH:-0}
+      ASTRA_DEMO_USER: ${ASTRA_DEMO_USER:-}
+      ASTRA_DEMO_PASSWORD: ${ASTRA_DEMO_PASSWORD:-}
     ports: ["127.0.0.1:8080:8000"]
     restart: unless-stopped

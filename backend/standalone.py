@@ -11,6 +11,7 @@ from pathlib import Path
 from fastapi.staticfiles import StaticFiles
 
 from backend.main import app
+from backend.basic_auth import configure_demo_auth
 
 WEB_DIST = Path(os.getenv("ASTRA_WEB_DIST", "/app/web_dist")).resolve()
 if not (WEB_DIST / "index.html").is_file():
@@ -20,4 +21,5 @@ if not (WEB_DIST / "index.html").is_file():
     )
 
 # Mount LAST: /api/*, /docs and /openapi.json must retain their FastAPI routes.
+configure_demo_auth(app)
 app.mount("/", StaticFiles(directory=WEB_DIST, html=True), name="mission-dashboard")

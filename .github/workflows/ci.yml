@@ -180,6 +180,26 @@ jobs:
           assert "/api/rocket/compare" in get("/openapi.json")["paths"]
           print("Single-container FastAPI + React smoke verification passed.")
           PY
+      - name: Verify optional Basic Auth against the running standalone container
+        env:
+          ASTRA_DEMO_AUTH: '1'
+          ASTRA_DEMO_USER: 'ci-reviewer'
+          ASTRA_DEMO_PASSWORD: 'ci-test-password-only'
+        run: |
+          set -eu
+          docker compose -f docker-compose.standalone.yml up --detach
+          ready=0
+          for attempt in $(seq 1 30); do
+            code=$(curl --silent --output /dev/null --write-out '%{http_code}' http://127.0.0.1:8080/)
+            if test "$code" = 401; then ready=1; break; fi
+            sleep 2
+          done
+          test "$ready" -eq 1
+          curl --silent --fail http://127.0.0.1:8080/api/health >/dev/null
+          curl --silent --fail --user "$ASTRA_DEMO_USER:$ASTRA_DEMO_PASSWORD" \
+            http://127.0.0.1:8080/ | grep -q 'AstraSentinel AI'
+          test "$(curl --silent --output /dev/null --write-out '%{http_code}' \
+            http://127.0.0.1:8080/api/orbit)" = 401
       - name: Display logs on failure
         if: failure()
         run: docker compose -f docker-compose.standalone.yml logs --no-color --tail=160
