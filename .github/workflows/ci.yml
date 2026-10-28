@@ -26,6 +26,13 @@ jobs:
         env:
           ASTRA_OFFLINE: '1'
         run: python -m scripts.generate_demo_artifacts --output artifacts/reports
+      - name: Publish ready-to-upload static portfolio site
+        uses: actions/upload-artifact@v4
+        with:
+          name: astrasentinel-static-website
+          path: docs/
+          if-no-files-found: error
+          retention-days: 30
       - name: Publish demo CSV, JSON and SVG as workflow artifact
         uses: actions/upload-artifact@v4
         with:
@@ -133,3 +140,49 @@ jobs:
       - name: Stop test containers
         if: always()
         run: docker compose down --remove-orphans
+
+
+  standalone-container:
+    runs-on: ubuntu-latest
+    timeout-minutes: 30
+    steps:
+      - uses: actions/checkout@v4
+      - name: Build and start single-container public-demo package
+        env:
+          ASTRA_OFFLINE: '1'
+        run: docker compose -f docker-compose.standalone.yml up --build --detach
+      - name: Verify standalone HTML, API and OpenAPI served by one process
+        run: |
+          set -eu
+          ready=0
+          for attempt in $(seq 1 60); do
+            if curl --silent --fail http://127.0.0.1:8080/api/health >/dev/null &&
+               curl --silent --fail http://127.0.0.1:8080/ >/dev/null; then
+              ready=1
+              break
+            fi
+            sleep 2
+          done
+          test "$ready" -eq 1
+          curl --silent --fail http://127.0.0.1:8080/ | grep -q 'AstraSentinel AI'
+          curl --silent --fail http://127.0.0.1:8080/docs | grep -q 'Swagger UI'
+          python3 - <<'PY'
+          import json
+          from urllib.request import urlopen
+          base = "http://127.0.0.1:8080"
+          def get(path):
+              with urlopen(base + path, timeout=30) as fp:
+                  return json.load(fp)
+          assert get("/api/health")["ok"] is True
+          assert get("/api/orbit")["status"] == "demo"
+          assert get("/api/weather")["status"] == "demo"
+          assert get("/api/rocket/demo")["metrics"]["apogee_km"] > 0
+          assert "/api/rocket/compare" in get("/openapi.json")["paths"]
+          print("Single-container FastAPI + React smoke verification passed.")
+          PY
+      - name: Display logs on failure
+        if: failure()
+        run: docker compose -f docker-compose.standalone.yml logs --no-color --tail=160
+      - name: Stop single-container demo
+        if: always()
+        run: docker compose -f docker-compose.standalone.yml down --remove-orphans
