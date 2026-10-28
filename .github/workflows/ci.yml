@@ -53,7 +53,7 @@ jobs:
 
   full-stack-smoke:
     runs-on: ubuntu-latest
-    timeout-minutes: 25
+    timeout-minutes: 35
     steps:
       - uses: actions/checkout@v4
       - name: Build and start the complete app using Docker
@@ -103,6 +103,28 @@ jobs:
           assert report['telemetry_ai']['live_spacecraft_telemetry'] is False
           print('Complete offline container smoke-test passed.')
           PY
+      - uses: actions/setup-node@v4
+        with:
+          node-version: '22'
+      - name: Install Chromium browser-test dependencies
+        working-directory: frontend
+        run: |
+          npm install --no-audit --no-fund
+          npx playwright install --with-deps chromium
+      - name: Capture actual browser screenshots and verify interactive workflows
+        working-directory: frontend
+        run: npm run test:e2e
+      - name: Publish real dashboard screenshot and failure trace artifact
+        if: always()
+        uses: actions/upload-artifact@v4
+        with:
+          name: astrasentinel-browser-e2e
+          path: |
+            frontend/artifacts/browser-screenshots/
+            frontend/artifacts/test-results/
+            frontend/artifacts/playwright-report/
+          if-no-files-found: warn
+          retention-days: 30
       - name: Dump application logs on failure
         if: failure()
         run: docker compose logs --no-color --tail=150

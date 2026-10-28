@@ -21,3 +21,7 @@ artifacts/models/
 *.joblib
 *.pkl
 .DS_Store
+
+# Browser screenshots/traces from Playwright
+frontend/artifacts/
+frontend/test-results/
