@@ -190,7 +190,7 @@ jobs:
           docker compose -f docker-compose.standalone.yml up --detach
           ready=0
           for attempt in $(seq 1 30); do
-            code=$(curl --silent --output /dev/null --write-out '%{http_code}' http://127.0.0.1:8080/)
+            code=$(curl --silent --output /dev/null --write-out '%{http_code}' http://127.0.0.1:8080/ || true)
             if test "$code" = 401; then ready=1; break; fi
             sleep 2
           done
