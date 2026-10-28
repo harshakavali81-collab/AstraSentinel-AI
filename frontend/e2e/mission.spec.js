@@ -11,6 +11,14 @@ test('real dashboard renders and exports actual physics scenarios', async ({page
   await expect(page.getByText('ISS / 25544')).toBeVisible()
   await page.screenshot({path:path.join(screenshots,'01-mission-overview.png'),fullPage:true})
 
+  await page.getByRole('button', {name:'Orbital Explorer'}).click()
+  await expect(page.getByRole('heading', {name:'Orbital Explorer'})).toBeVisible()
+  await expect(page.getByRole('img', {name:/Actual modeled ISS ground track/i})).toBeVisible()
+  const sampledPaths=await page.locator('.ground-track polyline').count()
+  expect(sampledPaths).toBeGreaterThan(0)
+  await page.screenshot({path:path.join(screenshots,'04-orbit-ground-track.png'),fullPage:true})
+
+
   await page.getByRole('button', {name:'Scenario Comparison'}).click()
   await expect(page.getByRole('heading', {name:'Scenario Comparison Lab'})).toBeVisible()
   await expect(page.locator('.scenario-stat')).toHaveCount(4)
