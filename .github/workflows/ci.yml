@@ -73,6 +73,8 @@ jobs:
             sleep 2
           done
           test "$ready" -eq 1
+          curl --silent --fail --head http://localhost:3000/ | grep -iq '^X-Content-Type-Options: nosniff'
+          curl --silent --fail --head http://localhost:3000/ | grep -iq '^X-Frame-Options: DENY'
           curl --silent --fail http://localhost:3000/ | grep -q "AstraSentinel AI"
           python3 - <<'PY'
           import json, urllib.request

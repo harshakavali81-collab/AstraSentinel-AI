@@ -94,6 +94,8 @@ docker compose up --build
 
 **Backend health:** http://localhost:8000/api/health
 
+**Private backend staging:** Use the dedicated docker-compose.private.yml file with ASTRA_OFFLINE=1 to bind the frontend only on 127.0.0.1:3000 and keep the backend private. See [deployment security guidance](docs/DEPLOYMENT.md). A trusted authenticated HTTPS edge is still required before any public deployment.
+
 ### Run directly with Python and Node.js
 
 Requirements: Python 3.11+, Node 22+ and npm.

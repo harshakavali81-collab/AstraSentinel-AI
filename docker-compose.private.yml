@@ -1,0 +1,14 @@
+# Restricts backend to the internal Compose network and frontend to loopback.
+# To publish publicly, place a separately configured authenticated HTTPS edge in front.
+services:
+  backend:
+    build: {context: ., dockerfile: backend/Dockerfile}
+    environment:
+      ASTRA_OFFLINE: ${ASTRA_OFFLINE:-1}
+    expose: ["8000"]
+    restart: unless-stopped
+  frontend:
+    build: {context: ., dockerfile: frontend/Dockerfile}
+    depends_on: [backend]
+    ports: ["127.0.0.1:3000:80"]
+    restart: unless-stopped

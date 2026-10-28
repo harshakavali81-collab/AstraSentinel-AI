@@ -41,6 +41,16 @@ docker compose up --build -d
 
 Open the actual console at http://localhost:3000/ and Swagger at http://localhost:8000/docs.
 
+## 3a. Restricted private staging profile
+
+An additional [docker-compose.private.yml](../docker-compose.private.yml) is provided for a safer local or trusted reverse-proxy staging setup. Its Python backend **does not publish port 8000 to the host**, and the frontend binds to host loopback only.
+
+Command: ASTRA_OFFLINE=1 docker compose -f docker-compose.private.yml up --build -d
+
+Connect locally to http://localhost:3000, or front it with your **own secure authenticated HTTPS gateway**. This is **not** a complete public-production deployment: user authentication, quotas, traffic security, monitoring, storage policy and abuse prevention remain necessary.
+
+nginx now includes basic browser security headers, a request-body cap, and a moderate request rate limit. This is defense in depth, not a guarantee of safety. The default development Compose still exposes backend port 8000 for local debugging; do not deploy that profile directly to a public IP.
+
 ### Deterministic offline demonstration
 
 Linux/macOS:

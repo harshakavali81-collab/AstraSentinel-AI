@@ -87,6 +87,7 @@ AstraSentinel-AI/
 ├── .github/dependabot.yml
 ├── .gitignore
 ├── docker-compose.yml
+├── docker-compose.private.yml    Private-backend loopback staging
 ├── LICENSE
 ├── pyproject.toml
 └── README.md
