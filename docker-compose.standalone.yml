@@ -1,0 +1,8 @@
+# Single-container local demonstration. Public access requires hosting controls.
+services:
+  mission-console:
+    build: {context: ., dockerfile: Dockerfile.standalone}
+    environment:
+      ASTRA_OFFLINE: ${ASTRA_OFFLINE:-1}
+    ports: ["127.0.0.1:8080:8000"]
+    restart: unless-stopped

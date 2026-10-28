@@ -1,0 +1,11 @@
+# Optional Render Blueprint. Connecting a Render account is required.
+# Defaults to deterministic DEMO measurements; no real satellite telemetry.
+services:
+  - type: web
+    name: astrasentinel-ai
+    runtime: docker
+    dockerfilePath: ./Dockerfile.standalone
+    healthCheckPath: /api/health
+    envVars:
+      - key: ASTRA_OFFLINE
+        value: "1"
