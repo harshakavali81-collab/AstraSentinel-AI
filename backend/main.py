@@ -5,6 +5,9 @@ from dataclasses import fields
 from typing import Literal
 from astrasentinel.scenarios import compare_scenarios
 from fastapi import FastAPI, HTTPException
+from fastapi.responses import FileResponse
+from pathlib import Path
+import os
 from fastapi.middleware.cors import CORSMiddleware
 from pydantic import BaseModel, Field, ConfigDict
 
@@ -59,6 +62,14 @@ class TelemetryRequest(BaseModel):
 
 @app.get("/")
 def root():
+    # In the single-container release, "/" must render the compiled React UI.
+    # Development/two-container mode retains its original JSON service index.
+    frontend_dist = os.getenv("ASTRA_WEB_DIST")
+    if frontend_dist:
+        index = Path(frontend_dist) / "index.html"
+        if not index.is_file():
+            raise HTTPException(503, "Compiled frontend HTML unavailable")
+        return FileResponse(index, media_type="text/html")
     return {"project": "AstraSentinel AI", "api_docs": "/docs",
             "dashboard": "frontend: http://localhost:5173 (dev) or http://localhost:3000 (Docker)"}
 

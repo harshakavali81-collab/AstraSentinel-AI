@@ -82,3 +82,21 @@ def test_compare_endpoint_rejects_unbounded_requests():
     assert client.post('/api/rocket/compare', json={
         'parameter': 'thrust_n', 'values': [25000, 30000],
         'baseline': {'dt_s': 0}}).status_code == 422
+
+
+def test_standalone_root_serves_actual_react_html(monkeypatch, tmp_path):
+    site = tmp_path / "web"
+    site.mkdir()
+    (site / "index.html").write_text("<!doctype html><title>AstraSentinel AI</title>")
+    monkeypatch.setenv("ASTRA_WEB_DIST", str(site))
+    response = client.get("/")
+    assert response.status_code == 200
+    assert "text/html" in response.headers["content-type"]
+    assert "<title>AstraSentinel AI</title>" in response.text
+
+
+def test_standalone_root_fails_closed_when_frontend_is_missing(monkeypatch, tmp_path):
+    monkeypatch.setenv("ASTRA_WEB_DIST", str(tmp_path / "not-built"))
+    response = client.get("/")
+    assert response.status_code == 503
+    assert "Compiled frontend" in response.text
