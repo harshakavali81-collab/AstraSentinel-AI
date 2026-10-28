@@ -55,7 +55,7 @@ The project now includes a **mobile-responsive, GitHub Pages-ready showcase**, w
 | Module | Functionality | Disclosure |
 |---|---|---|
 | Satellite data explorer | Fetch ISS (NORAD 25544) public CelesTrak TLE, show provenance | CelesTrak cached for two hours; offline historical demo |
-| Interactive 3D orbit | SGP4 propagation, 121 samples, 3D Earth rotation/zoom, orbital time scrubber | Simplified TEME→ECEF transform |
+| Interactive 3D orbit and ground track | SGP4 propagation, 121 samples, 3D Earth orbit and computed latitude/longitude chart with dateline breaks | Simplified TEME-to-ECEF approximation, no precision geodetic basemap |
 | Space-weather observations | NOAA SWPC Kp data, timeline, storm threshold and freshness | Supports 2026 JSON shape, labeled fallback |
 | Satellite Health ML | Seeded telemetry, IsolationForest, artificial fault injection, z-score diagnostics | Synthetic-only training and evaluation |
 | Rocket Lab | 1D variable-mass ascent with gravity, density, thrust and drag | Educational numerical simulation |
@@ -68,7 +68,7 @@ The project now includes a **mobile-responsive, GitHub Pages-ready showcase**, w
 ## 🪐 Dashboard screens
 
 1. **Mission Overview** — satellite orbit status, latest Kp value, AI anomaly count, rocket metrics.
-2. **Orbital Explorer** — rotate or zoom Earth, select a timestamp, inspect 3D coordinates and estimated altitude.
+2. **Orbital Explorer** — rotate or zoom Earth, inspect SGP4 orbit points, estimated altitude and computed latitude/longitude ground track.
 3. **Satellite Health AI** — inspect synthetic anomaly events, evaluated metrics and score custom hypothetical readings.
 4. **Space Weather** — view NOAA Kp trends, storm threshold and actual/demo source status.
 5. **Rocket Lab** — adjust thrust, propellant, mass, atmospheric multiplier and analyze trajectory plots.
@@ -139,6 +139,8 @@ python -m scripts.generate_demo_artifacts --output artifacts/reports
 ~~~
 
 Download the generated samples from a successful [GitHub Actions workflow run](https://github.com/harshakavali81-collab/AstraSentinel-AI/actions/workflows/ci.yml) under the artifact named **astrasentinel-scientific-demo**.
+
+The CI workflow also runs Chromium browser screenshots and functional interaction tests against the complete offline Docker app. Download the **astrasentinel-browser-e2e** artifact from a successful GitHub Actions workflow to see actual running-app images and test traces. These are separate from the conceptual SVG gallery.
 
 The test fixture forces offline mode. GitHub Actions runs Python tests and a separate React build on every push to main and every pull request, with a **full Docker Compose smoke test** that boots the frontend and backend together and verifies working science routes. No secret API key is required.
 

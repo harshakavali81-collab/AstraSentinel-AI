@@ -23,7 +23,13 @@ AstraSentinel-AI/
 │       └── telemetry.py           Synthetic ML anomaly detection
 ├── frontend/
 │   ├── Dockerfile
-│   ├── nginx.conf
+│   ├── nginx.conf            Browser headers and request limits
+│   ├── playwright.config.js Chromium integration test configuration
+│   ├── e2e/
+│   │   └── mission.spec.js   Browser flow and real screenshots
+│   ├── tests/
+│   │   ├── curves.test.mjs   Comparison curve alignment
+│   │   └── groundTrack.test.mjs Geospatial plotting and dateline
 │   ├── index.html
 │   ├── package.json
 │   ├── vite.config.js
@@ -31,6 +37,9 @@ AstraSentinel-AI/
 │       ├── main.jsx
 │       ├── api.js
 │       ├── App.jsx                Mission pages and charts
+│       ├── GroundTrack.jsx        Model-derived ground track map
+│       ├── groundTrack.js        Projection and dateline split
+│       ├── scenarioCurves.js     Common time-axis interpolation
 │       ├── ScenarioLab.jsx        One-factor rocket comparison and CSV export
 │       ├── AtmospherePage.jsx     Atmosphere visualization and multiplier
 │       ├── MissionExportPanel.jsx  JSON and CSV browser exports
@@ -43,6 +52,7 @@ AstraSentinel-AI/
 │   ├── conftest.py                No-network fixture
 │   ├── test_ingestion.py
 │   ├── test_orbit.py
+│   ├── test_security_contracts.py
 │   ├── test_portfolio_site.py
 │   ├── test_gallery.py
 │   ├── test_scenarios.py
@@ -97,7 +107,7 @@ AstraSentinel-AI/
 
 - **src/astrasentinel**: importable, framework-independent scientific models. Each can be unit-tested without the web app.
 - **backend**: HTTP interface, schemas and request validation.
-- **frontend**: visual mission-control application and 3D globe.
+- **frontend**: visual mission-control application, 3D globe, SGP4 ground-track chart, unit tests and browser end-to-end screenshots.
 - **tests**: reproducible offline quality checks and API integration.
 - **docs/images**: original scalable 3D-style diagrams and project illustrations.
 - **docs**: explanations, diagrams, source disclosures, test plan and interview presentation material.

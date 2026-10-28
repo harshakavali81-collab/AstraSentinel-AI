@@ -9,7 +9,10 @@ The pytest fixture sets ASTRA_OFFLINE=1 automatically. The tests require **no ex
 | tests/test_ingestion.py | Parse TLE, reject malformed pairs, accept NOAA modern and legacy Kp schemas, reject unphysical values, verify demo label |
 | tests/test_orbit.py | Approximate rotation preserves norm, GMST angle range, ISS-formatted historic TLE produces LEO-like altitude/period, demo anchored to epoch |
 | tests/test_portfolio_site.py | Static site image and stylesheet links plus honest presentation content |
+| frontend/tests/curves.test.mjs | Shared time-axis interpolation, early termination and bounded sampling |
 | frontend/tests/groundTrack.test.mjs | Map projection bounds, antimeridian splitting and correct sample continuity |
+| tests/test_security_contracts.py | nginx protective headers and restricted backend staging profile |
+| frontend/e2e/mission.spec.js | Real Chromium dashboard navigation, scenario changes, CSV download and screenshots |
 | tests/test_gallery.py | SVG artwork XML parsing and README image references |
 | tests/test_scenarios.py | Bounded finite inputs, unique parameter values, deterministic outputs, thrust and density effects, curve sizes and source labeling |
 | tests/test_rocket.py | Atmosphere density monotonicity, drag sign, inverse-square gravity trend, bounded integration, denser atmosphere gives reduced apogee |
@@ -24,6 +27,7 @@ python -m pip install -e '.[dev]'
 python -m pytest tests -v --cov=astrasentinel --cov-report=term-missing
 cd frontend
 npm install
+npm test
 npm run build
 ~~~
 
@@ -35,11 +39,11 @@ Windows PowerShell can use the same pytest command since the fixture forces ASTR
 - The exponential atmosphere is not validated against NRLMSISE-00 or the 1976 Standard Atmosphere.
 - The rocket integrator has not been assessed by step-size convergence against a higher-order reference method or flight telemetry.
 - The ML detector is evaluated only against seeded artificial fault injections; there is no mission-realistic failure distribution.
-- Frontend bundling and the static landing-page link inventory are checked; a full browser end-to-end screenshot regression suite has not been added.
+- Chromium browser end-to-end smoke testing is implemented. Visual baseline comparisons and multi-browser or GPU fidelity tests are not yet provided.
 
 ## Future gates
 
-Introduce numerical reference vectors, convergence tests, simulated extreme-altitude cases, mock upstream failures and source rate-limit tests, full browser interaction tests, hosting security scans, training-data drift checks and external domain review before claiming a stronger validation standard.
+Introduce numerical reference vectors, convergence tests, simulated extreme-altitude cases, mock upstream failures and source rate-limit tests, cross-browser visual regression and broader interactions, hosting security scans, training-data drift checks and external domain review before claiming a stronger validation standard.
 
 
 ## Docker Compose full-stack smoke verification

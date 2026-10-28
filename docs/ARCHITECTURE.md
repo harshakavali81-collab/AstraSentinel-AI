@@ -89,3 +89,12 @@ The independent scientific module `src/astrasentinel/scenarios.py` accepts two t
 ## Static Job-Portfolio Website
 
 `docs/index.html` and `docs/landing.css` implement a self-contained GitHub Pages-ready website. They link to original SVG artwork and explain actual features. It does **not** run React/FastAPI, and public hosting requires the owner to enable a supported Pages deployment.
+
+
+## Ground-track scientific plot and browser verification
+
+The Orbital Explorer includes a 2D equirectangular latitude/longitude chart using the actual SGP4-propagated orbit points. The frontend groundTrack.js projection rejects out-of-range coordinates and splits the plotted polyline across longitude wrapping at +/-180 degrees. It intentionally omits a world-coastline texture. The scene is not a precision geodetic plot.
+
+Rocket comparison lines are interpolated onto a common time axis by scenarioCurves.js to avoid broken charts from different simulation end times. They are not extrapolated after the underlying trajectory ends. Node tests cover interpolation and map geometry.
+
+Playwright Chromium end-to-end checks run against the Docker-integrated app in deterministic offline mode and export real dashboard screenshots, covering navigation, scenario computation, input validation and CSV export.
