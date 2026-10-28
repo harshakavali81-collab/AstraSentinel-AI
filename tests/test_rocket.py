@@ -35,3 +35,18 @@ def test_bad_rocket_parameter_rejected():
         simulate(RocketConfig(dry_mass_kg=-1))
     with pytest.raises(ValueError):
         simulate(RocketConfig(dt_s=0))
+
+
+def test_non_integer_burn_boundary_splits_numerical_step():
+    config = RocketConfig(burn_time_s=60.15, dt_s=0.2, duration_s=95)
+    points = simulate(config)['points']
+    at_burnout = [p for p in points if abs(p['time_s'] - 60.15) < 1e-7]
+    assert len(at_burnout) == 1
+    assert at_burnout[0]['mass_kg'] == pytest.approx(config.dry_mass_kg)
+    assert at_burnout[0]['acceleration_m_s2'] < 0  # coast: drag plus gravity
+
+
+def test_rocket_step_size_sanity_check():
+    fine = simulate(RocketConfig(dt_s=0.1))['metrics']['apogee_km']
+    standard = simulate(RocketConfig(dt_s=0.2))['metrics']['apogee_km']
+    assert abs(fine - standard) / max(fine, 0.001) < 0.1

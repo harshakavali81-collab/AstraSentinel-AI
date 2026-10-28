@@ -58,3 +58,10 @@ The default integration step is 0.2 seconds, with physical input bounds and a si
 Automated tests confirm the Earth-frame rotation preserves vector norm; atmosphere density decreases with altitude; gravity decreases with height; drag always opposes velocity; masses stay at/above dry mass; altitude stays nonnegative; simulation outputs remain finite; and higher assumed air density decreases apogee for the demonstration case. This is **sanity checking**, not professional aerospace model validation.
 
 ![Rocket ascent and drag 3D-style diagram](images/rocket-physics-3d.svg)
+
+
+## Burnout-boundary integration and step-size sanity checks
+
+The semi-implicit Euler integration now **splits a time step at the prescribed engine burnout event**. For example, if the burn ends at 60.15 seconds and the configured step is 0.2 seconds, the integrator records a sample at 60.15 seconds and switches to coasting immediately afterward rather than applying full thrust through the rest of the nominal step. This improves event handling while remaining a low-order educational solver.
+
+A deterministic unit test compares the default scenario at 0.1 and 0.2-second steps for broad numerical consistency. **This is not a rigorous convergence study, independently validated rocket dynamics, or a safety margin**.

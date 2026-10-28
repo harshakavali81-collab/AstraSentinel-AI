@@ -54,9 +54,10 @@ def simulate(config: RocketConfig | None = None) -> dict:
     points = []
     total_mass = config.dry_mass_kg + config.propellant_kg
     mdot = config.propellant_kg / config.burn_time_s
-    step_count = math.ceil(config.duration_s / config.dt_s)
+    # Allow two extra samples for the exact burn-boundary and landing event.
+    # The burn split avoids accidentally applying thrust beyond the configured burn.
+    step_count = math.ceil(config.duration_s / config.dt_s) + 2
     for i in range(step_count + 1):
-        burn_remaining = max(0.0, min(config.burn_time_s - t, config.dt_s))
         mass = max(config.dry_mass_kg, total_mass - mdot * min(t, config.burn_time_s))
         on = t < config.burn_time_s - 1e-10 and config.propellant_kg > 0
         thrust = config.thrust_n if on else 0.0
@@ -71,9 +72,11 @@ def simulate(config: RocketConfig | None = None) -> dict:
         peak_h, peak_v, max_q = max(peak_h, h), max(peak_v, v), max(max_q, q)
         if i > 0 and h <= 0 and v < 0:
             break
-        if i == step_count:
+        if i == step_count or t >= config.duration_s - 1e-10:
             break
         step = min(config.dt_s, config.duration_s - t)
+        if on:
+            step = min(step, config.burn_time_s - t)
         if step <= 0:
             break
         # Semi-implicit Euler integrates acceleration then position.
@@ -81,9 +84,6 @@ def simulate(config: RocketConfig | None = None) -> dict:
         h_next = h + v_next * step
         t += step
         v, h = v_next, max(0, h_next)
-        if burn_remaining < step and on:
-            # Burn boundary can cross a step; this is an educational approximation.
-            pass
     return {
         "configuration": asdict(config), "assumptions": [
             "1D vertical point-mass ascent", "exponential atmosphere with fixed scale height",
