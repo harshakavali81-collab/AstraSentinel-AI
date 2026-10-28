@@ -43,12 +43,17 @@ AstraSentinel-AI/
 │   ├── conftest.py                No-network fixture
 │   ├── test_ingestion.py
 │   ├── test_orbit.py
+│   ├── test_portfolio_site.py
+│   ├── test_gallery.py
 │   ├── test_scenarios.py
 │   ├── test_rocket.py
 │   ├── test_telemetry.py
 │   └── test_reporting.py
 │   └── test_api.py
 ├── docs/
+│   ├── index.html             Portfolio landing page, Pages-ready
+│   ├── landing.css            Mobile-responsive landing styles
+│   ├── DEPLOYMENT.md          Hosting and security guide
 │   ├── gallery/
 │   │   ├── astrasentinel-banner.svg
 │   │   ├── orbital-geometry.svg
@@ -75,6 +80,10 @@ AstraSentinel-AI/
 │   ├── REPORTING.md
 │   └── TEST_PLAN.md
 ├── .env.example
+├── .dockerignore
+├── CONTRIBUTING.md
+├── SECURITY.md
+├── .github/dependabot.yml
 ├── .gitignore
 ├── docker-compose.yml
 ├── LICENSE

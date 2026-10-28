@@ -12,13 +12,22 @@
 ![React](https://img.shields.io/badge/Frontend-React%20%2B%20WebGL-61dafb)
 ![Purpose](https://img.shields.io/badge/Scope-Educational-orange)
 
-[Visual Gallery](docs/VISUAL_GALLERY.md) | [Quick Start](#-quick-start) | [3D Diagrams](#-project-architecture) | [Project Tree](docs/PROJECT_TREE.md) | [API](docs/API_REFERENCE.md) | [Interview Guide](docs/INTERVIEW_GUIDE.md)
+[Portfolio Website](docs/index.html) | [Visual Gallery](docs/VISUAL_GALLERY.md) | [Quick Start](#-quick-start) | [3D Diagrams](#-project-architecture) | [Project Tree](docs/PROJECT_TREE.md) | [API](docs/API_REFERENCE.md) | [Interview Guide](docs/INTERVIEW_GUIDE.md)
 
 </div>
 
 ![AstraSentinel AI original panoramic space mission banner](docs/gallery/astrasentinel-banner.svg)
 
 > **Important:** Orbital elements and geomagnetic readings are fetched from public sources when available. **All satellite health telemetry is synthetic**. The rocket and atmospheric simulators are simplified educational models, **not real-flight design tools**. The globe's geographical shapes are artistic, not a precision Earth map. No NASA, ISRO or SpaceX affiliation or private spacecraft data access is claimed.
+
+## 🌍 Portfolio Website
+
+The project now includes a **mobile-responsive, GitHub Pages-ready showcase**, with original diagrams, technology overview, project links and clear scientific disclaimers.
+
+- [Website source](docs/index.html) · [Stylesheet](docs/landing.css) · [Hosting instructions](docs/DEPLOYMENT.md)
+- Preview locally from the repository root: `python -m http.server 8080 --directory docs`, then open http://localhost:8080.
+- To publish publicly, enable **GitHub Pages** in Settings → Pages and select branch **main**, folder **/docs**. This website is not live until hosting is enabled and verified.
+- The separate interactive React/FastAPI dashboard still requires a full-stack host. GitHub Pages **cannot** run the Python backend.
 
 ## 🎨 Space Mission Visual Gallery
 
@@ -192,6 +201,8 @@ flowchart TD
 | [Test Plan](docs/TEST_PLAN.md) | Repeatable test strategy and scientific validation gaps |
 | [Limitations](docs/LIMITATIONS.md) | Data caveats, hosting and safety limitations |
 | [Interview Guide](docs/INTERVIEW_GUIDE.md) | Job-project explanation and resume bullets |
+| [Deployment Guide](docs/DEPLOYMENT.md) | Static website, server deployment and security requirements |
+| [Contributing](CONTRIBUTING.md) | Tests, source transparency and project standards |
 | [Mission Reports](docs/REPORTING.md) | Downloadable JSON/CSV, offline graphs and CI artifacts |
 
 ## 🌐 External data acknowledgements
