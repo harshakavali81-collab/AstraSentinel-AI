@@ -9,6 +9,7 @@ The pytest fixture sets ASTRA_OFFLINE=1 automatically. The tests require **no ex
 | tests/test_ingestion.py | Parse TLE, reject malformed pairs, accept NOAA modern and legacy Kp schemas, reject unphysical values, verify demo label |
 | tests/test_orbit.py | Approximate rotation preserves norm, GMST angle range, ISS-formatted historic TLE produces LEO-like altitude/period, demo anchored to epoch |
 | tests/test_portfolio_site.py | Static site image and stylesheet links plus honest presentation content |
+| frontend/tests/groundTrack.test.mjs | Map projection bounds, antimeridian splitting and correct sample continuity |
 | tests/test_gallery.py | SVG artwork XML parsing and README image references |
 | tests/test_scenarios.py | Bounded finite inputs, unique parameter values, deterministic outputs, thrust and density effects, curve sizes and source labeling |
 | tests/test_rocket.py | Atmosphere density monotonicity, drag sign, inverse-square gravity trend, bounded integration, denser atmosphere gives reduced apogee |

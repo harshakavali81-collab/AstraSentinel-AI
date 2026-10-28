@@ -7,6 +7,7 @@ import OrbitGlobe from './OrbitGlobe.jsx'
 import AtmospherePage from './AtmospherePage.jsx'
 import MissionExportPanel from './MissionExportPanel.jsx'
 import ScenarioLab from './ScenarioLab.jsx'
+import GroundTrack from './GroundTrack.jsx'
 import {api} from './api.js'
 
 const nav=[
@@ -100,6 +101,9 @@ function OrbitPage({state}){
         <Panel title="Coordinate reference" icon={Earth}><p className="details">{d.frame}. Geographical boundaries on the globe are stylized. No precision geodesy, prediction of collisions or maneuver guidance is implied.</p>
           <a className="external" href={d.source_url} target="_blank" rel="noreferrer">CelesTrak GP data ↗</a></Panel>
       </div></div>
+      <Panel title="SGP4-derived ground track (latitude / longitude)" icon={Earth}>
+        <GroundTrack points={d.points} source={d.source} status={d.status}/>
+      </Panel>
       <Panel title="Estimated altitude trajectory" icon={ChartNoAxesCombined}><Plot data={d.points.map((p,i)=>({...p,sample:i}))} x="sample"
         series={[{key:'altitude_km',title:'Altitude (km)'}]}/></Panel></>:<Loading state={state}/>}
     </>

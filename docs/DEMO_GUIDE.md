@@ -13,7 +13,7 @@
 ## Eight-screen walkthrough
 
 1. **Mission overview:** Explain the data cards. ISS altitude is an SGP4 estimate; Kp is NOAA space-weather context; flagged anomalies are synthetic. Show data-source labels.
-2. **Orbital explorer:** Drag and zoom the Three.js planet, scrub the timeline, and show changing 3D points and latitude/longitude. Explain why a TLE requires SGP4 and why Earth rotation is applied.
+2. **Orbital explorer:** Drag and zoom the Three.js planet, scrub the timeline, and show changing 3D points and latitude/longitude. Explain why a TLE requires SGP4 and why Earth rotation is applied. Scroll to the computed latitude/longitude ground-track grid, which handles dateline crossings; it is a coordinate chart without coastlines.
 3. **Satellite health AI:** Show battery-voltage and temperature series, compare anomaly alerts, and input a strongly abnormal reading. Explain IsolationForest, independent synthetic evaluation and interpretation limits.
 4. **Space weather:** Read the NOAA Kp series and geomagnetic storm Kp=5 threshold. Point out observation age and transparent offline fallback.
 5. **Rocket lab:** Run the default simulator, then change the atmospheric multiplier from 0.6 to 2.0 and compare apogee. Explain mass loss, thrust, inverse-square gravity and drag.
