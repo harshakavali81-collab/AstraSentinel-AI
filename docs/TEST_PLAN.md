@@ -41,7 +41,7 @@ Windows PowerShell can use the same pytest command since the fixture forces ASTR
 - The exponential atmosphere is not validated against NRLMSISE-00 or the 1976 Standard Atmosphere.
 - The rocket integrator has not been assessed by step-size convergence against a higher-order reference method or flight telemetry.
 - The ML detector is evaluated only against seeded artificial fault injections; there is no mission-realistic failure distribution.
-- Chromium browser end-to-end smoke testing is implemented. Visual baseline comparisons and multi-browser or GPU fidelity tests are not yet provided.
+- Chromium browser end-to-end smoke testing is implemented, including lazily loaded globe/experiment routes. Visual baseline comparisons and multi-browser or GPU fidelity tests are not yet provided.
 
 ## Future gates
 

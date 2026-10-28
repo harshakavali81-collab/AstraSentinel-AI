@@ -1,0 +1,84 @@
+name: Publish real dashboard screenshots
+
+# Publish only screenshots from a completed, successful MAIN push workflow.
+# workflow_run is privileged: never checkout or execute code from external PRs.
+on:
+  workflow_run:
+    workflows: ["AstraSentinel CI"]
+    types: [completed]
+  workflow_dispatch:
+
+permissions:
+  contents: write
+  actions: read
+
+concurrency:
+  group: astrasentinel-screenshots-main
+  cancel-in-progress: false
+
+jobs:
+  publish:
+    if: >-
+      github.event_name == 'workflow_dispatch' ||
+      (github.event.workflow_run.conclusion == 'success' &&
+       github.event.workflow_run.head_branch == 'main' &&
+       github.event.workflow_run.event == 'push')
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          ref: main
+          persist-credentials: true
+      - name: Find the verified CI workflow run
+        id: run
+        env:
+          GH_TOKEN: ${{ github.token }}
+          EVENT_NAME: ${{ github.event_name }}
+          EVENT_RUN: ${{ github.event.workflow_run.id }}
+        run: |
+          if [ "$EVENT_NAME" = "workflow_dispatch" ]; then
+            latest=$(gh api "repos/$GITHUB_REPOSITORY/actions/workflows/ci.yml/runs?branch=main&status=success&per_page=1" --jq '.workflow_runs[0].id')
+          else
+            latest="$EVENT_RUN"
+          fi
+          test "$latest" != "null" && test -n "$latest"
+          echo "run_id=$latest" >> "$GITHUB_OUTPUT"
+      - name: Download authentic Chromium screenshots from that successful run
+        uses: actions/download-artifact@v4
+        with:
+          name: astrasentinel-browser-e2e
+          run-id: ${{ steps.run.outputs.run_id }}
+          github-token: ${{ github.token }}
+          path: incoming
+      - name: Check and copy ONLY the four expected captures
+        run: |
+          set -euo pipefail
+          mkdir -p docs/screenshots
+          for name in 01-mission-overview.png 02-rocket-comparison.png 03-rocket-lab.png 04-orbit-ground-track.png; do
+            match=$(find incoming -type f -name "$name" -print -quit)
+            if [ -z "$match" ]; then
+              echo "::error::Verified browser capture missing: $name"
+              exit 1
+            fi
+            # PNG signature verification; reject accidental HTML/trace files.
+            python3 - "$match" <<'PY'
+          import sys
+          with open(sys.argv[1], "rb") as f:
+              assert f.read(8) == b"\x89PNG\r\n\x1a\n"
+          PY
+            cp "$match" "docs/screenshots/$name"
+          done
+          printf '%s\n'             '# Real AstraSentinel AI browser screenshots'             ''             'These four PNGs were captured from a **running offline Docker Compose application** using Playwright/Chromium, NOT image-generation mockups.'             ''             '- [Mission Overview](01-mission-overview.png)'             '- [Rocket Scenario Comparison](02-rocket-comparison.png)'             '- [Rocket Lab](03-rocket-lab.png)'             '- [3D Orbital Explorer and computed ground track](04-orbit-ground-track.png)'             ''             'The underlying ISS orbit uses the bundled **historical demo TLE**, space weather is **synthetic historical demo** data and spacecraft telemetry is **entirely synthetic**. These screenshots are not real spacecraft operations.'             > docs/screenshots/README.md
+      - name: Commit screenshot gallery to the public source repository
+        run: |
+          set -euo pipefail
+          git config user.name "github-actions[bot]"
+          git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
+          git add docs/screenshots/
+          if git diff --cached --quiet; then
+            echo "Dashboard screenshots unchanged; nothing to commit."
+            exit 0
+          fi
+          git commit -m "docs: publish verified offline Chromium dashboard screenshots [skip ci]"
+          git pull --rebase origin main
+          git push origin HEAD:main

@@ -1,14 +1,16 @@
-import React, {useEffect,useState} from 'react'
+import React, {Suspense,lazy,useEffect,useState} from 'react'
 import {Activity,Atom,ChartNoAxesCombined,CloudSun,Cpu,Database,Earth,Gauge,GitBranch,
   Orbit,Radio,RefreshCw,Rocket,Satellite,ShieldAlert,SlidersHorizontal,Sparkles,TrendingUp,
   Waves,Zap} from 'lucide-react'
 import {CartesianGrid,Line,LineChart,ResponsiveContainer,Tooltip,XAxis,YAxis,Legend,ReferenceLine} from 'recharts'
-import OrbitGlobe from './OrbitGlobe.jsx'
-import AtmospherePage from './AtmospherePage.jsx'
 import MissionExportPanel from './MissionExportPanel.jsx'
-import ScenarioLab from './ScenarioLab.jsx'
 import GroundTrack from './GroundTrack.jsx'
 import {api} from './api.js'
+
+// Keep the high-cost Three.js globe and experiment labs out of the initial route.
+const OrbitGlobe=lazy(()=>import('./OrbitGlobe.jsx'))
+const AtmospherePage=lazy(()=>import('./AtmospherePage.jsx'))
+const ScenarioLab=lazy(()=>import('./ScenarioLab.jsx'))
 
 const nav=[
   ['overview','Mission Overview',Gauge],['orbit','Orbital Explorer',Orbit],
@@ -92,7 +94,7 @@ function OrbitPage({state}){
   const d=state.data;return <><Header eyebrow="MODULE 01 / ASTRODYNAMICS" title="Orbital Explorer"
     desc="CelesTrak orbital elements · SGP4 propagation · interactive 3D Earth" badge="3D ORBIT VIEWER"/>
     {d?<><Source source={d.source} age={d.elements_age_hours} status={d.status}/>
-      <div className="orbit-grid"><OrbitGlobe orbit={d}/><div className="rightpanels">
+      <div className="orbit-grid"><Suspense fallback={<div className="empty">Preparing 3D Earth viewer…</div>}><OrbitGlobe orbit={d}/></Suspense><div className="rightpanels">
         <Panel title="Orbital elements" icon={Satellite}><div className="kv">
           <p>NORAD ID <strong>{d.catalog_id}</strong></p><p>Object <strong>{d.name}</strong></p>
           <p>Inclination <strong>{d.inclination_deg}°</strong></p><p>Period <strong>{d.period_minutes} min</strong></p>
@@ -223,8 +225,8 @@ export default function App(){
       {page==='telemetry'&&<TelemetryPage state={tele}/>}
       {page==='weather'&&<WeatherPage state={weather}/>}
       {page==='rocket'&&<RocketPage state={rocket}/>} 
-      {page==='atmosphere'&&<AtmospherePage state={atmosphere}/>}
-      {page==='scenarios'&&<ScenarioLab/>}
+      {page==='atmosphere'&&<Suspense fallback={<div className="empty">Loading atmosphere lab…</div>}><AtmospherePage state={atmosphere}/></Suspense>}
+      {page==='scenarios'&&<Suspense fallback={<div className="empty">Loading scenario lab…</div>}><ScenarioLab/></Suspense>}
       {page==='architecture'&&<ArchitecturePage/>}
     </div><footer>ASTRASENTINEL AI © 2026 · EDUCATIONAL DIGITAL TWIN <span>ORBIT ≠ GROUND TRUTH · MODEL SCORE ≠ RISK PROBABILITY</span></footer>
     </main></div>

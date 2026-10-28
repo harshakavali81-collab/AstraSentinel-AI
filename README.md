@@ -29,6 +29,10 @@ The project now includes a **mobile-responsive, GitHub Pages-ready showcase**, w
 - To publish publicly, enable **GitHub Pages** in Settings → Pages and select **GitHub Actions** as the publishing source and run [AstraSentinel Static Portfolio Pages](.github/workflows/pages.yml). This website is not live until hosting is enabled and verified.
 - The separate interactive React/FastAPI dashboard still requires a full-stack host. GitHub Pages **cannot** run the Python backend.
 
+## 📸 Real application screenshots
+
+Chromium browser integration tests capture four **real images of the running offline app** (Mission Overview, Orbital Explorer/ground track, Rocket Scenario Lab and Rocket Lab). The [screenshot publishing workflow](.github/workflows/publish-screenshots.yml) copies them from a successful CI run into `docs/screenshots/` on `main` when repository permissions allow. Their sample orbital and weather data are historical/demo and telemetry is synthetic; conceptual artwork is kept separate. If this automated commit has not run, download the `astrasentinel-browser-e2e` artifact from [GitHub Actions](https://github.com/harshakavali81-collab/AstraSentinel-AI/actions/workflows/ci.yml).
+
 ## 🎨 Space Mission Visual Gallery
 
 **Eight original, editable SVG pictures and graphs**, committed directly to this GitHub repository. Conceptual graphics are not real flight data or screenshots of an operational mission.
