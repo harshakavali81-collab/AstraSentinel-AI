@@ -17,3 +17,8 @@ Use GitHub's private vulnerability reporting if the repository has it enabled, o
 - Avoid committing environment secrets and private data.
 - Review dependency updates, pin production images, and monitor resource-intensive numerical endpoints.
 - Do not rely on test success to claim aerospace or production security certification.
+
+
+## Hosted demo credential gate
+
+The standalone deployment offers `ASTRA_DEMO_AUTH=1` plus `ASTRA_DEMO_USER` and `ASTRA_DEMO_PASSWORD`. When enabled, the process **fails to start** if credentials are missing; GET /api/health remains open for provider probes. The browser uses HTTP Basic authentication, which **must** be wrapped in trusted HTTPS. Render and Railway deployment manifests opt into this protection and require private host variables. It is a single-account gate, not multiuser identity, access policy, brute-force mitigation, SSO or a security audit. Use strong unique credentials, short-lived demos, and trusted provider access controls.

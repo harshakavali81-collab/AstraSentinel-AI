@@ -33,3 +33,8 @@ GitHub Actions additionally runs a full-stack Docker Compose integration smoke t
 ## Standalone hosting caveat
 
 A combined React/FastAPI Docker image and optional provider manifests are included for easy deployment, but **a manifest alone is not a deployed website**. The image has no built-in multiuser authentication or edge rate limiting. A live Internet URL requires an authenticated host connection, trusted HTTPS, traffic controls, and a validated deployment. GitHub Pages, when enabled, publishes only the static portfolio showcase, not the computational backend.
+
+
+### Optional Basic authentication
+
+Single-container deployments include a simple opt-in, single-account HTTP Basic access gate. Hosted Render/Railway configuration files require host-supplied credentials by default. This **does not** provide password recovery, account permissions, OAuth/SSO, request-rate limits, intrusion prevention or a substitute for HTTPS. It is appropriate only as a lightweight gate for a small private educational demonstration.

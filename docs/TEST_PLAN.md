@@ -11,6 +11,7 @@ The pytest fixture sets ASTRA_OFFLINE=1 automatically. The tests require **no ex
 | tests/test_portfolio_site.py | Static site image and stylesheet links plus honest presentation content |
 | frontend/tests/curves.test.mjs | Shared time-axis interpolation, early termination and bounded sampling |
 | frontend/tests/groundTrack.test.mjs | Map projection bounds, antimeridian splitting and correct sample continuity |
+| tests/test_basic_auth.py | Single-account credential validation, protected dashboard/API and missing-secret fail-closed behavior |
 | tests/test_standalone_contract.py | Combined React+Python image build contracts, deployment manifests, localhost binding |
 | tests/test_security_contracts.py | nginx protective headers and restricted backend staging profile |
 | frontend/e2e/mission.spec.js | Real Chromium dashboard navigation, scenario changes, CSV download and screenshots |
@@ -65,4 +66,4 @@ Windows PowerShell: run $env:ASTRA_OFFLINE="1" first, then docker compose up --b
 
 ## Single-image container verification
 
-The `standalone-container` CI job builds [Dockerfile.standalone](../Dockerfile.standalone), starts it with `docker-compose.standalone.yml` on host loopback port 8080, and checks that **React HTML, FastAPI Swagger docs, SGP4 demo orbit, synthetic NOAA Kp, rocket simulation, and OpenAPI scenario comparisons** are served by the same Python process. This supplements (not replaces) two-service Docker and Chromium checks. The container is not flight-qualified or ready for an unprotected public endpoint.
+The `standalone-container` CI job builds [Dockerfile.standalone](../Dockerfile.standalone), starts it with `docker-compose.standalone.yml` on host loopback port 8080, and checks that **React HTML, FastAPI Swagger docs, SGP4 demo orbit, synthetic NOAA Kp, rocket simulation, and OpenAPI scenario comparisons** are served by the same Python process. The standalone job also restarts with temporary test-only credentials and verifies HTTP 401 without authorization, HTTP 200 with correct Basic authentication and a publicly reachable health check. This supplements (not replaces) two-service Docker and Chromium checks. The container is not flight-qualified or ready for an unprotected public endpoint.

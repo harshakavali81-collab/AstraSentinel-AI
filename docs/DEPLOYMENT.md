@@ -66,6 +66,22 @@ Open http://localhost:8080 for the **working React mission dashboard** and http:
 
 Hosting configurations included: [Render](../render.yaml) and [Railway IaC](../.railway/railway.ts). They point to the one-image Dockerfile and health-check endpoint. A provider account, deployment permission and platform setup are required to produce a real public URL. Most hosts assign a `PORT` environment variable, and the container uses it automatically.
 
+### Optional single-account reviewer login
+
+The standalone container now supports **an optional HTTP Basic credential gate**, intended for a single private recruiter/reviewer demonstration. This is intentionally simple, not OAuth, granular authorization or an audited production identity platform.
+
+~~~bash
+ASTRA_DEMO_AUTH=1 ASTRA_DEMO_USER=reviewer \
+  ASTRA_DEMO_PASSWORD=SET_A_LONG_SECRET_OUTSIDE_GIT \
+  docker compose -f docker-compose.standalone.yml up --build -d
+~~~
+
+Your browser prompts for the reviewer credentials when opening the dashboard. Both HTML and all computational API routes require the same credentials. **GET /api/health** remains accessible so providers can determine readiness. Incorrect or missing credentials return HTTP 401. The app fails to start if authentication is explicitly enabled without credentials.
+
+For **Render Blueprints**, authentication is enabled by default in `render.yaml`; Render prompts for the username and password at first Blueprint creation, without committing values to GitHub. For **Railway IaC**, authentication is also enabled in `.railway/railway.ts`; set `ASTRA_DEMO_USER` and `ASTRA_DEMO_PASSWORD` in Railway's **private service variables** before deployment. The service intentionally fails closed without them. Both providers need an authorized account and active service.
+
+HTTP Basic sends reusable credentials with requests: **use only over HTTPS**. Never share the password in source code or public issues. Add your host's rate limits, IP controls, access monitoring and secure TLS termination separately; Basic auth is not a comprehensive public-production security solution.
+
 ### Railway 2026 infrastructure setup
 
 Railway **no longer accepts the older railway.json/railway.toml Config as Code flow for new services**. This project instead provides [Railway Infrastructure as Code](../.railway/railway.ts), which declares the GitHub source, one-container Dockerfile, deterministic offline mode and health check.

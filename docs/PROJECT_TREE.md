@@ -11,6 +11,7 @@ AstraSentinel-AI/
 ├── backend/
 │   ├── __init__.py
 │   ├── Dockerfile
+│   ├── basic_auth.py             Optional hosted-demo credential middleware
 │   ├── main.py                    FastAPI application
 │   └── standalone.py              Mounts compiled React assets after API routes
 ├── src/
@@ -54,6 +55,7 @@ AstraSentinel-AI/
 │   ├── conftest.py                No-network fixture
 │   ├── test_ingestion.py
 │   ├── test_orbit.py
+│   ├── test_basic_auth.py         Credential handling and HTTP auth tests
 │   ├── test_standalone_contract.py
 │   ├── test_security_contracts.py
 │   ├── test_portfolio_site.py
