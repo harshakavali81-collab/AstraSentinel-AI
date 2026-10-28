@@ -31,5 +31,5 @@ def test_host_manifests_do_not_embed_secrets_or_api_tokens():
     assert "defineRailway" in railway
     assert "github(" in railway
     assert "healthCheckPath" in render
-    assert "healthcheckPath" in railway
+    assert 'healthcheck: "/api/health"' in railway
     assert "secret" not in render.lower()
