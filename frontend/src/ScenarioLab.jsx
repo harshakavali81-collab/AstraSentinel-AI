@@ -1,7 +1,8 @@
 import React, {useEffect, useMemo, useState} from 'react'
-import {Activity, ChartNoAxesCombined, Download, FlaskConical, Rocket, SlidersHorizontal, TrendingUp} from 'lucide-react'
+import {ChartNoAxesCombined, Download, FlaskConical, Rocket, SlidersHorizontal, TrendingUp} from 'lucide-react'
 import {CartesianGrid, Line, LineChart, Legend, ResponsiveContainer, Tooltip, XAxis, YAxis} from 'recharts'
 import {api} from './api.js'
+import {makeComparisonRows} from './scenarioCurves.js'
 
 const PRESETS = {
   thrust_n: [25000, 30000, 35000, 40000],
@@ -31,15 +32,6 @@ function saveFile(name, content, type) {
   URL.revokeObjectURL(url)
 }
 
-function makeRows(scenarios) {
-  const byTime = new Map()
-  scenarios.forEach((scenario, idx) => scenario.curve.forEach(pt => {
-    const time = pt.time_s
-    if (!byTime.has(time)) byTime.set(time, {time_s: time})
-    byTime.get(time)['scenario_' + (idx + 1)] = pt.altitude_km
-  }))
-  return [...byTime.values()].sort((a, b) => a.time_s - b.time_s)
-}
 
 export default function ScenarioLab() {
   const [parameter, setParameter] = useState('thrust_n')
@@ -49,7 +41,7 @@ export default function ScenarioLab() {
   const [data, setData] = useState(null)
   const [busy, setBusy] = useState(false)
   const [error, setError] = useState('')
-  const chartData = useMemo(() => data ? makeRows(data.scenarios) : [], [data])
+  const chartData = useMemo(() => data ? makeComparisonRows(data.scenarios) : [], [data])
 
   async function run(values, kind, base) {
     setBusy(true)
@@ -154,7 +146,7 @@ export default function ScenarioLab() {
                   borderRadius:10, color:'#e0f6fd'}}/>
                 <Legend wrapperStyle={{fontSize:11}}/>
                 {data.scenarios.map((s, i) => <Line key={s.id} dataKey={s.id}
-                  name={String(s.value) + ' ' + data.parameter_unit} type="monotone"
+                  name={String(s.value) + ' ' + data.parameter_unit} type="linear"
                   stroke={COLORS[i]} strokeWidth={2.5} dot={false} connectNulls={false}
                   isAnimationActive={false}/>)}
               </LineChart>

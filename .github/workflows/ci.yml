@@ -46,6 +46,8 @@ jobs:
           node-version: '22'
       - name: Install pinned frontend dependencies
         run: npm install --no-audit --no-fund
+      - name: Test chart interpolation and browser-independent frontend logic
+        run: npm test
       - name: Build production dashboard
         run: npm run build
 
