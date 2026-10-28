@@ -8,6 +8,7 @@ The pytest fixture sets ASTRA_OFFLINE=1 automatically. The tests require **no ex
 |---|---|
 | tests/test_ingestion.py | Parse TLE, reject malformed pairs, accept NOAA modern and legacy Kp schemas, reject unphysical values, verify demo label |
 | tests/test_orbit.py | Approximate rotation preserves norm, GMST angle range, ISS-formatted historic TLE produces LEO-like altitude/period, demo anchored to epoch |
+| tests/test_published_assets.py | Permanent screenshot PNG headers, source-labeled JSON provenance and valid generated SVG science plots |
 | tests/test_portfolio_site.py | Static site image and stylesheet links plus honest presentation content |
 | frontend/tests/curves.test.mjs | Shared time-axis interpolation, early termination and bounded sampling |
 | frontend/tests/groundTrack.test.mjs | Map projection bounds, antimeridian splitting and correct sample continuity |
@@ -67,3 +68,8 @@ Windows PowerShell: run $env:ASTRA_OFFLINE="1" first, then docker compose up --b
 ## Single-image container verification
 
 The `standalone-container` CI job builds [Dockerfile.standalone](../Dockerfile.standalone), starts it with `docker-compose.standalone.yml` on host loopback port 8080, and checks that **React HTML, FastAPI Swagger docs, SGP4 demo orbit, synthetic NOAA Kp, rocket simulation, and OpenAPI scenario comparisons** are served by the same Python process. The standalone job also restarts with temporary test-only credentials and verifies HTTP 401 without authorization, HTTP 200 with correct Basic authentication and a publicly reachable health check. This supplements (not replaces) two-service Docker and Chromium checks. The container is not flight-qualified or ready for an unprotected public endpoint.
+
+
+## Automated GitHub screenshot and data gallery publication
+
+After successful CI on a main-branch push, the separate `publish-screenshots.yml` workflow downloads the verified actual-browser screenshot and 15 scientific-output artifacts. It validates PNG signatures and parses SVG XML before committing them into `docs/screenshots/` and `docs/science/`. This is an artifact-publication workflow, not a fabricated screenshot generator. Repository write permissions are necessary. Both galleries remain committed and visible even after the Actions artifacts expire.

@@ -7,7 +7,8 @@ AstraSentinel-AI/
 ├── .github/
 │   └── workflows/
 │       ├── ci.yml                 Python, browser and standalone container CI
-│       └── pages.yml              Pages publishing only after owner enablement
+│       ├── pages.yml              Pages publishing only after owner enablement
+│       └── publish-screenshots.yml Verified screenshot + science output commits
 ├── backend/
 │   ├── __init__.py
 │   ├── Dockerfile
@@ -70,6 +71,8 @@ AstraSentinel-AI/
 │   ├── landing.css            Mobile-responsive landing styles
 │   ├── DEPLOYMENT.md          Hosting and security guide
 │   ├── SCENARIO_LAB.md        Sensitivity experiments and modeling limits
+│   ├── screenshots/             4 actual Chromium dashboard PNGs + provenance
+│   ├── science/                 10 data-driven SVGs, 4 CSVs, JSON and README
 │   ├── gallery/
 │   │   ├── astrasentinel-banner.svg
 │   │   ├── orbital-geometry.svg
@@ -119,7 +122,8 @@ AstraSentinel-AI/
 - **backend**: HTTP interface, schemas and request validation.
 - **frontend**: visual mission-control application, 3D globe, SGP4 ground-track chart, unit tests and browser end-to-end screenshots.
 - **tests**: reproducible offline quality checks and API integration.
-- **docs/images**: original scalable 3D-style diagrams and project illustrations.
+- **docs/images and docs/gallery**: original scalable conceptual diagrams and project illustrations.
+- **docs/screenshots and docs/science**: committed genuine browser screenshots and model-generated deterministic scientific artifacts. Automatically refreshed after successful CI.
 - **docs**: explanations, diagrams, source disclosures, test plan and interview presentation material.
 - **.github/workflows**: automated Python tests and React build on source changes.
 - **docker-compose.yml**: backend + frontend as a single runnable local stack.

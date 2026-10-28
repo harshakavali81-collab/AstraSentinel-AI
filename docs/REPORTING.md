@@ -37,11 +37,11 @@ The command produces **15 reproducible offline files**:
 
 ![Example 3D-style rocket physics](images/rocket-physics-3d.svg)
 
-GitHub Actions additionally runs this command after the Python tests and uploads these files as a **30-day downloadable Actions artifact named astrasentinel-scientific-demo**. Use the [Actions tab](https://github.com/harshakavali81-collab/AstraSentinel-AI/actions/workflows/ci.yml), select a successful workflow run and open the artifact section to retrieve them. Workflow artifacts are not persisted forever; they can always be regenerated locally.
+The 15 output files are also **permanently committed in [docs/science](science/README.md)** by the successful-run publishing workflow. GitHub Actions additionally runs this command after the Python tests and uploads these files as a **30-day downloadable Actions artifact named astrasentinel-scientific-demo**. Use the [Actions tab](https://github.com/harshakavali81-collab/AstraSentinel-AI/actions/workflows/ci.yml), select a successful workflow run and open the artifact section to retrieve them. Workflow artifacts are not persisted forever; they can always be regenerated locally.
 
 ## Real dashboard screenshots
 
-The CI full-stack job also drives the actual application using headless Chromium. It records **Mission Overview, Rocket Scenario Comparison and Rocket Lab** screenshots, checks scenario inputs and downloaded CSV content, and uploads the screenshots and traces as the separate **astrasentinel-browser-e2e** GitHub Actions artifact (30-day retention). These are browser captures, not the conceptual SVG illustrations in the repository gallery.
+The CI full-stack job drives the actual application using headless Chromium. It records **Mission Overview, Orbital Explorer and ground track, Rocket Scenario Comparison and Rocket Lab** screenshots, checks scenario inputs and downloaded CSV content, and uploads the screenshots and traces as the separate **astrasentinel-browser-e2e** GitHub Actions artifact (30-day retention). The PNG screenshots are now also committed under [docs/screenshots](screenshots/README.md). These are browser captures, not the conceptual SVG illustrations in the repository gallery.
 
 ## JSON report fields
 

@@ -31,3 +31,10 @@ h1 em,h2 em{color:var(--accent);font-style:normal}.intro{max-width:640px;color:#
 @media(max-width:1000px){nav{gap:12px} .cap-grid{grid-template-columns:repeat(2,1fr)} .hero{min-height:580px} .hero-art{opacity:.7} .engineering{gap:22px}}
 @media(max-width:680px){.wrap{padding-left:20px;padding-right:20px}.site-nav{padding:20px}.site-nav nav a:not(.nav-action){display:none}.site-mark{font-size:11px}.nav-action{font-size:10px;padding:9px}.hero{min-height:550px}.hero-copy{padding-top:40px;padding-bottom:50px}h1{letter-spacing:-1.5px}.intro{font-size:14px}.numbers{grid-template-columns:repeat(2,minmax(0,1fr))}.numbers strong{font-size:15px}.section{padding-top:70px;padding-bottom:70px}.cap-grid,.gallery,.engineering{grid-template-columns:1fr}.cap{min-height:auto}.cta-inner{display:block}.cta .btn{margin-top:16px}.hero-buttons .btn{width:100%}}
 @media(prefers-reduced-motion:reduce){html{scroll-behavior:auto}.btn{transition:none}}
+
+/* Verified browser screenshots and reproducible output: show entire source images, not decorative crops. */
+.screens-gallery img{aspect-ratio:16/10;object-fit:contain;object-position:center;background:#081523}
+.science-section{background:linear-gradient(180deg,#091e2f,#071322);border-top:1px solid #244359;border-bottom:1px solid #244359}
+.science-gallery img{aspect-ratio:1.75;object-fit:contain;object-position:center;background:#091827}
+.portfolio-note{color:#9dbccc;line-height:1.8;margin-top:23px;font-size:12px}
+.portfolio-note a{color:#80f1d7;text-decoration:underline;text-underline-offset:3px}
