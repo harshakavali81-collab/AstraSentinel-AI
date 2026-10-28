@@ -104,7 +104,8 @@ AstraSentinel-AI/
 ├── docker-compose.standalone.yml Single deployable container on 127.0.0.1:8080
 ├── Dockerfile.standalone        React+Python one-image production build
 ├── render.yaml                 Optional Render deployment manifest
-├── railway.json                Optional Railway deployment manifest
+├── .railway/
+│   └── railway.ts              Current Railway infrastructure-as-code manifest
 ├── LICENSE
 ├── pyproject.toml
 └── README.md

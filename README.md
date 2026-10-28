@@ -106,7 +106,7 @@ docker compose -f docker-compose.standalone.yml up --build
 
 Open **http://localhost:8080** for the real React dashboard and **http://localhost:8080/docs** for the actual Python API. The standalone demo defaults to historically labeled offline orbital/weather sources and synthetic satellite telemetry. It runs the original simulation and ML code, not mocked API responses.
 
-Deployment manifests: [Render Blueprint](render.yaml) | [Railway configuration](railway.json) | [Hosting guide](docs/DEPLOYMENT.md). Connecting your own hosting account and configuring a protected HTTPS deployment is still required before sharing an Internet URL. Static GitHub Pages does not run Python.
+Deployment manifests: [Render Blueprint](render.yaml) | [Railway IaC](.railway/railway.ts) | [Hosting guide](docs/DEPLOYMENT.md). Connecting your own hosting account and configuring a protected HTTPS deployment is still required before sharing an Internet URL. Static GitHub Pages does not run Python.
 
 ### Run directly with Python and Node.js
 

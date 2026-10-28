@@ -25,9 +25,11 @@ def test_standalone_compose_binds_loopback_only():
 
 def test_host_manifests_do_not_embed_secrets_or_api_tokens():
     render = (ROOT / "render.yaml").read_text()
-    railway = (ROOT / "railway.json").read_text()
+    railway = (ROOT / ".railway" / "railway.ts").read_text()
     assert "Dockerfile.standalone" in render
     assert "Dockerfile.standalone" in railway
+    assert "defineRailway" in railway
+    assert "github(" in railway
     assert "healthCheckPath" in render
     assert "healthcheckPath" in railway
     assert "secret" not in render.lower()

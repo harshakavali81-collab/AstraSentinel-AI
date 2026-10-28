@@ -64,7 +64,19 @@ curl http://127.0.0.1:8080/api/health
 
 Open http://localhost:8080 for the **working React mission dashboard** and http://localhost:8080/docs for Swagger. This version defaults to `ASTRA_OFFLINE=1`, so it makes **no live science-source calls** and is reproducible for interviews. The browser still performs actual FastAPI requests for orbital/ML/simulation functions.
 
-Hosting configurations included: [Render](../render.yaml) and [Railway](../railway.json). They point to the one-image Dockerfile and health-check endpoint. A provider account, deployment permission and platform setup are required to produce a real public URL. Most hosts assign a `PORT` environment variable, and the container uses it automatically.
+Hosting configurations included: [Render](../render.yaml) and [Railway IaC](../.railway/railway.ts). They point to the one-image Dockerfile and health-check endpoint. A provider account, deployment permission and platform setup are required to produce a real public URL. Most hosts assign a `PORT` environment variable, and the container uses it automatically.
+
+### Railway 2026 infrastructure setup
+
+Railway **no longer accepts the older railway.json/railway.toml Config as Code flow for new services**. This project instead provides [Railway Infrastructure as Code](../.railway/railway.ts), which declares the GitHub source, one-container Dockerfile, deterministic offline mode and health check.
+
+1. Connect your Railway account to GitHub and authorize the `AstraSentinel-AI` repository.
+2. Create or link an authorized Railway project using Railway CLI.
+3. From the repository root, run `railway config plan` and review the proposed service; then apply with `railway config apply`.
+4. Configure authentication, usage limits and HTTPS in your provider environment **before** enabling public access. Add a domain through the Railway dashboard and verify the actual URL.
+5. If using Railway's dashboard instead of IaC, select the GitHub repo, set the Dockerfile path through the service variable `RAILWAY_DOCKERFILE_PATH=Dockerfile.standalone`, and verify `/api/health` after deployment.
+
+The IaC file is committed source, not proof of a Railway project or domain existing. See [Railway IaC documentation](https://docs.railway.com/infrastructure-as-code/reference).
 
 **Important security boundary:** The standalone Python container does not pass through the nginx rate limits and browser headers of the two-container version. It is not a production-hardened public service by itself. Configure a trusted HTTPS proxy, request limits, access controls, logging and abuse protection **outside** the image before exposing it publicly. Keep the default demo data source mode when demonstrating to recruiters.
 
