@@ -201,6 +201,7 @@ flowchart TD
 | [Test Plan](docs/TEST_PLAN.md) | Repeatable test strategy and scientific validation gaps |
 | [Limitations](docs/LIMITATIONS.md) | Data caveats, hosting and safety limitations |
 | [Interview Guide](docs/INTERVIEW_GUIDE.md) | Job-project explanation and resume bullets |
+| [Experiment Lab](docs/SCENARIO_LAB.md) | One-factor rocket physics comparisons, math assumptions, API and test links |
 | [Deployment Guide](docs/DEPLOYMENT.md) | Static website, server deployment and security requirements |
 | [Contributing](CONTRIBUTING.md) | Tests, source transparency and project standards |
 | [Mission Reports](docs/REPORTING.md) | Downloadable JSON/CSV, offline graphs and CI artifacts |

@@ -54,6 +54,7 @@ AstraSentinel-AI/
 │   ├── index.html             Portfolio landing page, Pages-ready
 │   ├── landing.css            Mobile-responsive landing styles
 │   ├── DEPLOYMENT.md          Hosting and security guide
+│   ├── SCENARIO_LAB.md        Sensitivity experiments and modeling limits
 │   ├── gallery/
 │   │   ├── astrasentinel-banner.svg
 │   │   ├── orbital-geometry.svg

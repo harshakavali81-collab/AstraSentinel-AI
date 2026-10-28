@@ -80,3 +80,12 @@ sequenceDiagram
 Add a satellite catalog with OMM JSON support (newer catalog IDs can exceed TLE limits); implement rigorous Earth-orientation transformations and ground tracks; introduce permitted observational space-science datasets; validate numerical ascent against high-order reference solvers; store experiments in Postgres; version calibrated ML artifacts; add controlled user accounts and monitoring.
 
 ![Orbital visualization concept](images/orbit-digital-twin.svg)
+
+
+## Scenario Comparison Lab
+
+The independent scientific module `src/astrasentinel/scenarios.py` accepts two to seven bounded, finite, unique variations of one rocket parameter. It runs the same deterministic solver for each experiment and returns metrics, a baseline comparison, and downsampled graphs. The REST entry point is `POST /api/rocket/compare`; the React implementation is `frontend/src/ScenarioLab.jsx`. This is a controlled sensitivity study, not uncertainty analysis or flight planning.
+
+## Static Job-Portfolio Website
+
+`docs/index.html` and `docs/landing.css` implement a self-contained GitHub Pages-ready website. They link to original SVG artwork and explain actual features. It does **not** run React/FastAPI, and public hosting requires the owner to enable a supported Pages deployment.

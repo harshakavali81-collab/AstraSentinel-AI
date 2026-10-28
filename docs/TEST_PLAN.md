@@ -8,6 +8,8 @@ The pytest fixture sets ASTRA_OFFLINE=1 automatically. The tests require **no ex
 |---|---|
 | tests/test_ingestion.py | Parse TLE, reject malformed pairs, accept NOAA modern and legacy Kp schemas, reject unphysical values, verify demo label |
 | tests/test_orbit.py | Approximate rotation preserves norm, GMST angle range, ISS-formatted historic TLE produces LEO-like altitude/period, demo anchored to epoch |
+| tests/test_portfolio_site.py | Static site image and stylesheet links plus honest presentation content |
+| tests/test_gallery.py | SVG artwork XML parsing and README image references |
 | tests/test_scenarios.py | Bounded finite inputs, unique parameter values, deterministic outputs, thrust and density effects, curve sizes and source labeling |
 | tests/test_rocket.py | Atmosphere density monotonicity, drag sign, inverse-square gravity trend, bounded integration, denser atmosphere gives reduced apogee |
 | tests/test_telemetry.py | Fixed seed repeatability, four expected features, anomaly flag for extreme cases, finite-value validation and evaluation ranges |
@@ -32,7 +34,7 @@ Windows PowerShell can use the same pytest command since the fixture forces ASTR
 - The exponential atmosphere is not validated against NRLMSISE-00 or the 1976 Standard Atmosphere.
 - The rocket integrator has not been assessed by step-size convergence against a higher-order reference method or flight telemetry.
 - The ML detector is evaluated only against seeded artificial fault injections; there is no mission-realistic failure distribution.
-- Frontend bundling is checked; a full browser end-to-end screenshot regression suite has not been added.
+- Frontend bundling and the static landing-page link inventory are checked; a full browser end-to-end screenshot regression suite has not been added.
 
 ## Future gates
 

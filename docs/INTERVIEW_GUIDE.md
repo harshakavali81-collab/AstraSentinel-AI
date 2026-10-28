@@ -14,6 +14,8 @@ AstraSentinel AI is my educational space-mission digital twin combining orbital 
 
 **How does the rocket simulation work?** At every time step, the model updates mass during the engine burn and computes thrust, altitude-dependent gravity and signed drag. It integrates velocity and altitude numerically and plots the simulated trajectory.
 
+**How is the rocket scenario comparison designed?** I implemented a deterministic one-factor-at-a-time experiment engine that validates two to seven unique bounded parameter values, runs the 1D rocket solver for each case, and returns metrics plus downsampled altitude/velocity data. A React page compares the curves and exports CSV/JSON. This is not uncertainty quantification or an operational launch optimizer.
+
 **How is the system reproducible?** I use fixed dataset/model seeds, cache and label public sources, include an offline mode, test source parsing/physics/API behavior and build the React app in GitHub Actions.
 
 **What would you improve?** I would validate coordinate frames against reference standards, use higher-fidelity atmosphere and integration, add OMM satellite catalog support, introduce PostgreSQL historical storage and validate ML with approved real mission data.
@@ -23,6 +25,6 @@ AstraSentinel AI is my educational space-mission digital twin combining orbital 
 - Developed an educational aerospace AI digital twin using Python, FastAPI and React, connecting public CelesTrak TLE and NOAA space-weather datasets.
 - Built an interactive Three.js 3D Earth viewer for SGP4-propagated ISS trajectories and Earth-frame approximate coordinate exploration.
 - Trained and evaluated an IsolationForest anomaly detector using controlled, seeded **synthetic satellite telemetry**, exposing interpretable REST predictions.
-- Implemented a configurable 1D rocket ascent model with variable mass, gravity and drag, supported by deterministic automated tests and CI.
+- Implemented a rocket physics engine plus bounded scenario-sensitivity experiments, a REST comparison API, interactive React charts, and CSV/JSON exports; verified with deterministic tests and Docker CI.
 
 **Be accurate:** do not claim a NASA/ISRO/SpaceX partnership, real satellite telemetry training, flight-certified simulations, validated collision prediction, or a live hosted production deployment.
