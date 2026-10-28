@@ -2,6 +2,8 @@
 from __future__ import annotations
 
 from dataclasses import fields
+from typing import Literal
+from astrasentinel.scenarios import compare_scenarios
 from fastapi import FastAPI, HTTPException
 from fastapi.middleware.cors import CORSMiddleware
 from pydantic import BaseModel, Field, ConfigDict
@@ -35,6 +37,15 @@ class RocketRequest(BaseModel):
     density_multiplier: float = 1.0
     duration_s: float = 420
     dt_s: float = 0.2
+
+
+class ScenarioCompareRequest(BaseModel):
+    model_config = ConfigDict(extra='forbid', allow_inf_nan=False)
+    parameter: Literal["thrust_n", "propellant_kg", "density_multiplier",
+                       "drag_coefficient", "area_m2"] = "thrust_n"
+    values: list[float] = Field(default_factory=lambda: [25000, 30000, 35000, 40000],
+                                min_length=2, max_length=7)
+    baseline: RocketRequest = Field(default_factory=RocketRequest)
 
 
 class TelemetryRequest(BaseModel):
@@ -99,6 +110,16 @@ def rocket(body: RocketRequest):
     try:
         config = RocketConfig(**body.model_dump())
         return simulate(config)
+    except ValueError as exc:
+        raise HTTPException(422, str(exc)) from exc
+
+
+@app.post("/api/rocket/compare")
+def compare_rocket(body: ScenarioCompareRequest):
+    """Bounded, reproducible educational physics experiment (max seven runs)."""
+    try:
+        return compare_scenarios(body.parameter, body.values,
+                                 RocketConfig(**body.baseline.model_dump()))
     except ValueError as exc:
         raise HTTPException(422, str(exc)) from exc
 

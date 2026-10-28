@@ -6,12 +6,13 @@ import {CartesianGrid,Line,LineChart,ResponsiveContainer,Tooltip,XAxis,YAxis,Leg
 import OrbitGlobe from './OrbitGlobe.jsx'
 import AtmospherePage from './AtmospherePage.jsx'
 import MissionExportPanel from './MissionExportPanel.jsx'
+import ScenarioLab from './ScenarioLab.jsx'
 import {api} from './api.js'
 
 const nav=[
   ['overview','Mission Overview',Gauge],['orbit','Orbital Explorer',Orbit],
   ['telemetry','Satellite Health AI',Activity],['weather','Space Weather',CloudSun],
-  ['rocket','Rocket Lab',Rocket],['atmosphere','Atmosphere Model',CloudSun],['architecture','System Architecture',GitBranch]]
+  ['rocket','Rocket Lab',Rocket],['scenarios','Scenario Comparison',SlidersHorizontal],['atmosphere','Atmosphere Model',CloudSun],['architecture','System Architecture',GitBranch]]
 const colors=['#70efd4','#80adff','#f3ba7c','#b8a9ff']
 function useEndpoint(path,version){
   const [state,set]=useState({data:null,loading:true,error:null})
@@ -219,6 +220,7 @@ export default function App(){
       {page==='weather'&&<WeatherPage state={weather}/>}
       {page==='rocket'&&<RocketPage state={rocket}/>} 
       {page==='atmosphere'&&<AtmospherePage state={atmosphere}/>}
+      {page==='scenarios'&&<ScenarioLab/>}
       {page==='architecture'&&<ArchitecturePage/>}
     </div><footer>ASTRASENTINEL AI © 2026 · EDUCATIONAL DIGITAL TWIN <span>ORBIT ≠ GROUND TRUTH · MODEL SCORE ≠ RISK PROBABILITY</span></footer>
     </main></div>

@@ -61,3 +61,24 @@ def test_mission_report_endpoint_has_disclosures():
     assert report['telemetry_ai']['live_spacecraft_telemetry'] is False
     assert report['rocket_simulation']['metrics']['apogee_km'] > 0
     assert len(report['limitations']) >= 5
+
+
+def test_compare_endpoint_exposes_bounded_physics_study():
+    r = client.post('/api/rocket/compare', json={
+        'parameter': 'density_multiplier', 'values': [0.5, 1, 2]})
+    assert r.status_code == 200, r.text
+    data = r.json()
+    assert data['parameter'] == 'density_multiplier'
+    assert len(data['scenarios']) == 3
+    assert data['scenarios'][0]['metrics']['apogee_km'] > data['scenarios'][2]['metrics']['apogee_km']
+    assert data['disclaimer']
+
+
+def test_compare_endpoint_rejects_unbounded_requests():
+    assert client.post('/api/rocket/compare', json={
+        'parameter': 'thrust_n', 'values': list(range(8))}).status_code == 422
+    assert client.post('/api/rocket/compare', json={
+        'parameter': 'thrust_n', 'values': [30000, 30000]}).status_code == 422
+    assert client.post('/api/rocket/compare', json={
+        'parameter': 'thrust_n', 'values': [25000, 30000],
+        'baseline': {'dt_s': 0}}).status_code == 422
