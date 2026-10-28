@@ -1,0 +1,54 @@
+name: AstraSentinel Static Portfolio Pages
+
+on:
+  push:
+    branches: [main]
+    paths:
+      - "docs/**"
+      - ".github/workflows/pages.yml"
+  workflow_dispatch:
+
+permissions:
+  contents: read
+
+jobs:
+  check-pages:
+    runs-on: ubuntu-latest
+    outputs:
+      enabled: ${{ steps.check.outputs.enabled }}
+    steps:
+      - id: check
+        name: Check whether the owner enabled GitHub Pages
+        env:
+          GH_TOKEN: ${{ github.token }}
+        run: |
+          if gh api "repos/${GITHUB_REPOSITORY}/pages" >/dev/null 2>&1; then
+            echo "enabled=true" >> "$GITHUB_OUTPUT"
+            echo "GitHub Pages is enabled; the site can be deployed."
+          else
+            echo "enabled=false" >> "$GITHUB_OUTPUT"
+            echo "::notice::To publish your static showcase, enable GitHub Pages with source 'GitHub Actions' under Settings > Pages, then run this workflow again."
+          fi
+
+  deploy:
+    needs: check-pages
+    if: needs.check-pages.outputs.enabled == 'true'
+    runs-on: ubuntu-latest
+    permissions:
+      contents: read
+      pages: write
+      id-token: write
+    environment:
+      name: github-pages
+      url: ${{ steps.publish.outputs.page_url }}
+    steps:
+      - uses: actions/checkout@v4
+      - name: Configure GitHub Pages metadata
+        uses: actions/configure-pages@v5
+      - name: Upload responsive static showcase
+        uses: actions/upload-pages-artifact@v4
+        with:
+          path: docs/
+      - name: Publish portfolio URL
+        id: publish
+        uses: actions/deploy-pages@v4
