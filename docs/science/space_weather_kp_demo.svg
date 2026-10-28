@@ -1,0 +1,13 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1040 540"
+role="img" aria-label="Synthetic historical geomagnetic Kp — generated offline educational simulation">
+<defs><linearGradient id="bg" x1="0" y1="0" x2="1" y2="1">
+<stop stop-color="#12344d"/><stop offset="1" stop-color="#061120"/>
+</linearGradient></defs>
+<rect width="1040" height="540" rx="23" fill="url(#bg)"/>
+<text x="95" y="62" fill="#76edd2" font-family="Arial" font-size="14" letter-spacing="3">ASTRASENTINEL AI / GENERATED SCIENCE GRAPH</text>
+<text x="95" y="103" fill="#e9fbff" font-family="Arial" font-weight="bold" font-size="30">Synthetic historical geomagnetic Kp</text>
+<line x1="95" y1="140.0" x2="985" y2="140.0" stroke="#24455a" stroke-dasharray="4 8"/><line x1="95" y1="203.0" x2="985" y2="203.0" stroke="#24455a" stroke-dasharray="4 8"/><line x1="95" y1="266.0" x2="985" y2="266.0" stroke="#24455a" stroke-dasharray="4 8"/><line x1="95" y1="329.0" x2="985" y2="329.0" stroke="#24455a" stroke-dasharray="4 8"/><line x1="95" y1="392.0" x2="985" y2="392.0" stroke="#24455a" stroke-dasharray="4 8"/><line x1="95" y1="455.0" x2="985" y2="455.0" stroke="#24455a" stroke-dasharray="4 8"/><text x="80" y="144.0" text-anchor="end" font-size="12" fill="#afc8d7">3.30</text><text x="80" y="207.0" text-anchor="end" font-size="12" fill="#afc8d7">2.64</text><text x="80" y="270.0" text-anchor="end" font-size="12" fill="#afc8d7">1.98</text><text x="80" y="333.0" text-anchor="end" font-size="12" fill="#afc8d7">1.32</text><text x="80" y="396.0" text-anchor="end" font-size="12" fill="#afc8d7">0.66</text><text x="80" y="459.0" text-anchor="end" font-size="12" fill="#afc8d7">0.00</text>
+<polyline fill="none" stroke="#76eed5" stroke-width="3.5" stroke-linejoin="round" points="95.0,359.5 113.9,330.9 132.9,264.1 151.8,197.3 170.7,140.0 189.7,235.5 208.6,292.7 227.6,359.5 246.5,359.5 265.4,330.9 284.4,264.1 303.3,197.3 322.2,140.0 341.2,235.5 360.1,292.7 379.0,359.5 398.0,359.5 416.9,330.9 435.9,264.1 454.8,197.3 473.7,140.0 492.7,235.5 511.6,292.7 530.5,359.5 549.5,359.5 568.4,330.9 587.3,264.1 606.3,197.3 625.2,140.0 644.1,235.5 663.1,292.7 682.0,359.5 701.0,359.5 719.9,330.9 738.8,264.1 757.8,197.3 776.7,140.0 795.6,235.5 814.6,292.7 833.5,359.5 852.4,359.5 871.4,330.9 890.3,264.1 909.3,197.3 928.2,140.0 947.1,235.5 966.1,292.7 985.0,359.5"/>
+<text x="540.0" y="483" text-anchor="middle" fill="#afc8d7" font-size="16" font-family="Arial">elapsed hours</text>
+<text x="95" y="518" fill="#7599af" font-family="Arial" font-size="12">kp · EDUCATIONAL MODEL · NOT REAL FLIGHT DATA</text>
+</svg>

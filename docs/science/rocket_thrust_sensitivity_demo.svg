@@ -1,0 +1,13 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1040 540"
+role="img" aria-label="Rocket thrust sensitivity (1D demo) — generated offline educational simulation">
+<defs><linearGradient id="bg" x1="0" y1="0" x2="1" y2="1">
+<stop stop-color="#12344d"/><stop offset="1" stop-color="#061120"/>
+</linearGradient></defs>
+<rect width="1040" height="540" rx="23" fill="url(#bg)"/>
+<text x="95" y="62" fill="#76edd2" font-family="Arial" font-size="14" letter-spacing="3">ASTRASENTINEL AI / GENERATED SCIENCE GRAPH</text>
+<text x="95" y="103" fill="#e9fbff" font-family="Arial" font-weight="bold" font-size="30">Rocket thrust sensitivity (1D demo)</text>
+<line x1="95" y1="140.0" x2="985" y2="140.0" stroke="#24455a" stroke-dasharray="4 8"/><line x1="95" y1="203.0" x2="985" y2="203.0" stroke="#24455a" stroke-dasharray="4 8"/><line x1="95" y1="266.0" x2="985" y2="266.0" stroke="#24455a" stroke-dasharray="4 8"/><line x1="95" y1="329.0" x2="985" y2="329.0" stroke="#24455a" stroke-dasharray="4 8"/><line x1="95" y1="392.0" x2="985" y2="392.0" stroke="#24455a" stroke-dasharray="4 8"/><line x1="95" y1="455.0" x2="985" y2="455.0" stroke="#24455a" stroke-dasharray="4 8"/><text x="80" y="144.0" text-anchor="end" font-size="12" fill="#afc8d7">79.52</text><text x="80" y="207.0" text-anchor="end" font-size="12" fill="#afc8d7">63.62</text><text x="80" y="270.0" text-anchor="end" font-size="12" fill="#afc8d7">47.71</text><text x="80" y="333.0" text-anchor="end" font-size="12" fill="#afc8d7">31.81</text><text x="80" y="396.0" text-anchor="end" font-size="12" fill="#afc8d7">15.90</text><text x="80" y="459.0" text-anchor="end" font-size="12" fill="#afc8d7">0.00</text>
+<polyline fill="none" stroke="#76eed5" stroke-width="3.5" stroke-linejoin="round" points="95.0,365.7 391.7,320.5 688.3,250.2 985.0,140.0"/>
+<text x="540.0" y="483" text-anchor="middle" fill="#afc8d7" font-size="16" font-family="Arial">thrust kN</text>
+<text x="95" y="518" fill="#7599af" font-family="Arial" font-size="12">apogee km · EDUCATIONAL MODEL · NOT REAL FLIGHT DATA</text>
+</svg>

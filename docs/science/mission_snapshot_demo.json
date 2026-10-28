@@ -1,0 +1,91 @@
+{
+  "documentation": {
+    "api": "/docs",
+    "model_card": "docs/MODEL_CARD.md",
+    "repo": "https://github.com/harshakavali81-collab/AstraSentinel-AI",
+    "science": "docs/PHYSICS.md"
+  },
+  "generated_at_utc": "2024-03-07T00:00:00+00:00",
+  "limitations": [
+    "Orbital data are public element estimates, not spacecraft telemetry.",
+    "Earth-fixed coordinates are approximate, not flight-grade navigation.",
+    "All spacecraft health training and validation data are synthetic.",
+    "Anomaly scores and synthetic metrics are not failure probabilities.",
+    "Rocket dynamics and atmospheric density are simplified educational models.",
+    "Demo or stale source data are always labeled and must not be read as live."
+  ],
+  "mode": "educational_research_demonstration",
+  "project": "AstraSentinel AI",
+  "rocket_simulation": {
+    "assumptions": [
+      "1D vertical point-mass ascent",
+      "exponential atmosphere with fixed scale height",
+      "quadratic drag; no wind or staging",
+      "semi-implicit Euler integration",
+      "not intended for real launch or flight certification"
+    ],
+    "integration_samples": 1216,
+    "metrics": {
+      "apogee_km": 33.957,
+      "max_dynamic_pressure_pa": 35108.5,
+      "peak_velocity_m_s": 704.62,
+      "simulated_time_s": 243.0
+    },
+    "scenario": {
+      "area_m2": 1.0,
+      "burn_time_s": 60.0,
+      "density_multiplier": 1.0,
+      "drag_coefficient": 0.42,
+      "dry_mass_kg": 480.0,
+      "dt_s": 0.2,
+      "duration_s": 420.0,
+      "propellant_kg": 900.0,
+      "thrust_n": 30000.0
+    }
+  },
+  "satellite": {
+    "catalog_id": 25544,
+    "coordinate_frame": "ECEF approximation from TEME (simplified GMST rotation)",
+    "inclination_deg": 51.64,
+    "name": "ISS (ZARYA)",
+    "orbit_status": "demo",
+    "orbital_elements_age_hours": 23153.2,
+    "orbital_elements_epoch_utc": "2024-03-07T12:25:40.104179+00:00",
+    "orbital_elements_source": "bundled_historical_demo",
+    "orbital_elements_url": "https://celestrak.org/NORAD/elements/gp.php?CATNR=25544&FORMAT=TLE",
+    "period_minutes": 92.9,
+    "sample_count": 121,
+    "sample_midpoint_altitude_km": 414.5,
+    "sample_midpoint_utc": "2024-03-07T12:25:40.104179+00:00"
+  },
+  "schema_version": "1.0",
+  "space_weather": {
+    "geomagnetic_level": "quiet to unsettled",
+    "observation_age_hours": null,
+    "observation_count": 48,
+    "planetary_kp": 1.0,
+    "source": "synthetic_historical_demo",
+    "source_url": "https://services.swpc.noaa.gov/products/noaa-planetary-k-index.json",
+    "status": "demo"
+  },
+  "telemetry_ai": {
+    "dataset_source": "synthetic_demo_telemetry",
+    "flagged_samples": 4,
+    "live_spacecraft_telemetry": false,
+    "model": "IsolationForest",
+    "sample_count": 144,
+    "synthetic_evaluation": {
+      "confusion_matrix": {
+        "fn": 17,
+        "fp": 15,
+        "tn": 385,
+        "tp": 3
+      },
+      "false_alarm_rate": 0.037,
+      "label_source": "controlled_synthetic_injections",
+      "precision": 0.167,
+      "recall": 0.15
+    },
+    "training_samples": 1800
+  }
+}
