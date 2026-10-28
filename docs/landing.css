@@ -1,0 +1,33 @@
+:root{--bg:#071322;--panel:#112539;--muted:#94aec1;--accent:#80f1d7;--ink:#eaf9ff;font-family:Inter,"Segoe UI",Arial,sans-serif;color:var(--ink);background:var(--bg);color-scheme:dark}
+*{box-sizing:border-box}html{scroll-behavior:smooth}body{margin:0;background:radial-gradient(ellipse at 83% 0,#143551 0,#071322 38%);min-width:320px}
+a{color:inherit;text-decoration:none}img{display:block;max-width:100%;height:auto}h1,h2,h3,p{margin-top:0}
+.wrap{max-width:1270px;margin:auto;padding-left:34px;padding-right:34px}
+.skip{position:absolute;left:-10000px;top:15px;z-index:50;background:white;color:#000;padding:12px}
+.skip:focus{left:15px}.site-nav{max-width:1360px;margin:auto;padding:23px 34px;display:flex;align-items:center;justify-content:space-between;gap:20px}
+.site-mark{font-size:15px;font-weight:900;letter-spacing:.8px;white-space:nowrap}.site-mark>span:first-child{color:var(--accent);font-size:20px;margin-right:7px}.site-mark>span:last-child{color:var(--accent)}
+nav{display:flex;gap:24px;align-items:center}nav a{font-size:12px;color:#bed5e3}nav a:hover,.text-link:hover{color:var(--accent)}
+.nav-action{border:1px solid #456b7d;border-radius:28px;padding:10px 16px}
+.hero{min-height:650px;position:relative;isolation:isolate;display:flex;align-items:center;overflow:hidden;border-bottom:1px solid #23445b}
+.hero-art{position:absolute;inset:0;z-index:-2;background-image:linear-gradient(90deg,#071322 0%,#071322ed 24%,#07132252 68%,#07132220 100%),url("gallery/astrasentinel-banner.svg");background-size:cover;background-position:center}
+.hero:after{content:"";inset:0;position:absolute;z-index:-1;background:linear-gradient(0deg,#071322,transparent 28%)}
+.hero-copy{width:100%;padding-top:76px;padding-bottom:88px}
+.eyebrow{color:var(--accent);font-size:11px;font-weight:800;letter-spacing:2.6px;margin-bottom:20px;text-transform:uppercase}
+h1{font-size:clamp(45px,5.5vw,84px);line-height:1.08;letter-spacing:-3px;margin-bottom:25px;max-width:900px}
+h1 em,h2 em{color:var(--accent);font-style:normal}.intro{max-width:640px;color:#c1d6e4;line-height:1.9;font-size:17px}
+.hero-buttons{display:flex;gap:12px;flex-wrap:wrap;margin:28px 0}.btn{display:inline-flex;justify-content:center;align-items:center;padding:15px 22px;border-radius:10px;font-weight:800;font-size:13px;transition:transform .2s}.btn:hover{transform:translateY(-2px)}
+.btn.solid{background:var(--accent);color:#092333}.btn.outline{background:#1a3545a8;border:1px solid #52808c}
+.subtle{font-size:11px;color:#8caabc}
+.numbers{display:grid;grid-template-columns:repeat(4,1fr);gap:15px;padding-top:35px;padding-bottom:35px;border-bottom:1px solid #284054}
+.numbers>div{padding:22px 20px;border-radius:13px;background:linear-gradient(145deg,#142f45,#102439);border:1px solid #2b465d}
+.numbers strong{display:block;font-size:19px;margin-bottom:8px}.numbers span{font-size:11px;color:#99b7c8}
+.section{padding-top:110px;padding-bottom:110px}.section h2,.cta h2{font-size:clamp(35px,4vw,53px);line-height:1.15;letter-spacing:-1.6px;margin-bottom:22px}
+.lead{max-width:760px;color:#adbfcc;font-size:15px;line-height:1.9;margin-bottom:40px}
+.cap-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:16px}.cap{padding:30px 27px;background:linear-gradient(145deg,#132a3e,#0c1b2c);border:1px solid #2b4759;border-radius:15px;min-height:234px}.cap>span{font-size:10px;color:var(--accent);font-weight:800;letter-spacing:1.6px}.cap h3{font-size:20px;margin:22px 0 14px}.cap p{color:var(--muted);font-size:13px;line-height:1.85}
+.gallery-section{border-top:1px solid #223d52;border-bottom:1px solid #223d52;background:linear-gradient(180deg,#0d2334,#071322)}
+.gallery{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:18px}.gallery figure{margin:0;overflow:hidden;background:#0a1b2c;border:1px solid #314e62;border-radius:14px}.gallery img{aspect-ratio:1.65;object-fit:cover;object-position:center;width:100%;background:#0a182a}.gallery figcaption{padding:19px 22px;display:grid;gap:7px}.gallery b{font-size:15px}.gallery span{font-size:12px;color:#9fb5c7}
+.engineering{display:grid;grid-template-columns:1fr 1fr;gap:58px}.engineering h3{font-size:25px}.engineering p{color:var(--muted);line-height:1.8}.terminal{border:1px solid #2c5b70;background:#071928;border-radius:14px;margin:25px 0;overflow:auto;padding:19px 22px}.terminal>span{display:block;color:var(--accent);font-weight:800;font-size:10px;letter-spacing:1.5px;margin-bottom:20px}.terminal code{font-size:12px;line-height:2.2;color:#d4eeeb;white-space:nowrap}.text-link{color:#74deca;font-size:12px;font-weight:800}
+.verification{display:grid;gap:13px}.verification>div{display:grid;grid-template-columns:30px 1fr;gap:5px;background:#112b3c;border:1px solid #2b5062;padding:23px;border-radius:13px}.verification span{grid-row:span 2;font-size:18px;color:var(--accent)}.verification strong{font-size:14px}.verification small{color:var(--muted);line-height:1.5;font-size:12px}
+.cta{border-top:1px solid #22485b;background:radial-gradient(ellipse at 65% 50%,#18475b 0,#0b2335 70%);padding:70px 0}.cta-inner{display:flex;align-items:center;justify-content:space-between;gap:30px}.cta p:not(.eyebrow){color:#bdd3df;font-size:13px}.foot{padding-top:27px;padding-bottom:27px;display:flex;justify-content:space-between;flex-wrap:wrap;gap:20px;color:#92adbe;font-size:11px}
+@media(max-width:1000px){nav{gap:12px} .cap-grid{grid-template-columns:repeat(2,1fr)} .hero{min-height:580px} .hero-art{opacity:.7} .engineering{gap:22px}}
+@media(max-width:680px){.wrap{padding-left:20px;padding-right:20px}.site-nav{padding:20px}.site-nav nav a:not(.nav-action){display:none}.site-mark{font-size:11px}.nav-action{font-size:10px;padding:9px}.hero{min-height:550px}.hero-copy{padding-top:40px;padding-bottom:50px}h1{letter-spacing:-1.5px}.intro{font-size:14px}.numbers{grid-template-columns:repeat(2,minmax(0,1fr))}.numbers strong{font-size:15px}.section{padding-top:70px;padding-bottom:70px}.cap-grid,.gallery,.engineering{grid-template-columns:1fr}.cap{min-height:auto}.cta-inner{display:block}.cta .btn{margin-top:16px}.hero-buttons .btn{width:100%}}
+@media(prefers-reduced-motion:reduce){html{scroll-behavior:auto}.btn{transition:none}}
