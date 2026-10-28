@@ -50,6 +50,7 @@
 | Space-weather observations | NOAA SWPC Kp data, timeline, storm threshold and freshness | Supports 2026 JSON shape, labeled fallback |
 | Satellite Health ML | Seeded telemetry, IsolationForest, artificial fault injection, z-score diagnostics | Synthetic-only training and evaluation |
 | Rocket Lab | 1D variable-mass ascent with gravity, density, thrust and drag | Educational numerical simulation |
+| Rocket Scenario Comparison | Parameter sweeps comparing thrust, propellant, drag and density | Bounded reproducible experiments with chart and CSV/JSON export |
 | Atmospheric Density Lab | Adjustable exponential density profile with logarithmic visualization | Simplified reference atmosphere, not empirical validation |
 | Research Report Export | Download mission JSON and orbital, rocket and synthetic telemetry CSVs | Source-attributed snapshots; offline SVG/CSV/JSON generator |
 | Mission dashboard | React/Vite, react-three-fiber/Three.js, Recharts, responsive styles | Served via nginx/Docker or Vite |
@@ -62,8 +63,9 @@
 3. **Satellite Health AI** — inspect synthetic anomaly events, evaluated metrics and score custom hypothetical readings.
 4. **Space Weather** — view NOAA Kp trends, storm threshold and actual/demo source status.
 5. **Rocket Lab** — adjust thrust, propellant, mass, atmospheric multiplier and analyze trajectory plots.
-6. **Atmospheric Density Lab** — change air-density multiplier and inspect logarithmic altitude curves.
-7. **System Architecture** — trace public data, scientific models, REST API, frontend and test coverage.
+6. **Scenario Comparison Lab** — vary one rocket parameter, compare simulated apogee and trajectories, export CSV and JSON.
+7. **Atmospheric Density Lab** — change air-density multiplier and inspect logarithmic altitude curves.
+8. **System Architecture** — trace public data, scientific models, REST API, frontend and test coverage.
 
 ## 🚀 Quick start
 
@@ -119,7 +121,7 @@ npm install
 npm run build
 ~~~
 
-Generate **13 deterministic artifacts** (JSON + CSV + nine different scientific SVG graphs + three CSV datasets):
+Generate **15 deterministic artifacts** (1 JSON, 4 CSV datasets and 10 scientific SVG graphs):
 
 ~~~bash
 python -m scripts.generate_demo_artifacts --output artifacts/reports

@@ -15,7 +15,7 @@ Prerequisite: install project dependencies with pip install -e '.[dev]' from the
 python -m scripts.generate_demo_artifacts --output artifacts/reports
 ~~~
 
-The command produces **13 reproducible offline files**:
+The command produces **15 reproducible offline files**:
 
 | Output | Contents |
 |---|---|
@@ -32,6 +32,8 @@ The command produces **13 reproducible offline files**:
 | rocket_velocity_demo.svg | Vertical velocity computed by the 1D educational integrator |
 | rocket_dynamic_pressure_demo.svg | Dynamic pressure computed from the 1D rocket and exponential atmosphere |
 | atmosphere_density_demo.svg | Exponential air density at 0–100 km, not a standard atmosphere |
+| rocket_thrust_sensitivity_demo.csv | Actual model output for 25, 30, 35 and 40 kN default rocket experiment |
+| rocket_thrust_sensitivity_demo.svg | Data-driven thrust versus apogee chart for the same one-factor study |
 
 ![Example 3D-style rocket physics](images/rocket-physics-3d.svg)
 
@@ -52,6 +54,6 @@ Reports are **not** engineering certification or real spacecraft diagnostics.
 
 ## Reproducibility checks
 
-The integration tests generate the offline dataset twice, compare bytes for all five outputs, verify CSV sizes and verify science-limitation disclosures. The fixed report timestamp used by the reproducible fixture is historical; the interactive API returns the current report creation timestamp.
+The integration tests generate the offline dataset twice, compare bytes for all 15 outputs, verify CSV sizes and verify science-limitation disclosures. The fixed report timestamp used by the reproducible fixture is historical; the interactive API returns the current report creation timestamp.
 
 Use report files in job portfolios with visible **SIMULATED / DEMO** labels.

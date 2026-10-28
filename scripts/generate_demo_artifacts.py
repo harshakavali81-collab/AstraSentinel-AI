@@ -20,6 +20,7 @@ from astrasentinel.telemetry import telemetry_series
 from astrasentinel.rocket import simulate
 from astrasentinel.atmosphere import density
 from astrasentinel.reporting import build_mission_report
+from astrasentinel.scenarios import compare_scenarios
 
 
 def save_csv(path: Path, rows: list[dict]) -> None:
@@ -138,8 +139,19 @@ def generate(output: Path) -> list[Path]:
         "atmosphere_density_demo.svg": science_plot_svg(
             atmospheric_points, "Exponential atmospheric density", "altitude_km", "density_kg_m3"),
     })
+    # A one-factor-at-a-time thrust study using the *actual* physics engine.
+    thrust_study = compare_scenarios("thrust_n", [25000, 30000, 35000, 40000])
+    thrust_points = [
+        {"thrust_kN": case["value"] / 1000,
+         "apogee_km": case["metrics"]["apogee_km"]}
+        for case in thrust_study["scenarios"]
+    ]
+    files["rocket_thrust_sensitivity_demo.svg"] = science_plot_svg(
+        thrust_points, "Rocket thrust sensitivity (1D demo)",
+        "thrust_kN", "apogee_km")
     for name, content in files.items():
         (output / name).write_text(content, encoding="utf-8")
+    save_csv(output / "rocket_thrust_sensitivity_demo.csv", thrust_points)
     save_csv(output / "rocket_trajectory_demo.csv", rocket["points"])
     save_csv(output / "orbit_track_demo.csv", [
         {**{k: row[k] for k in ("time", "altitude_km", "latitude_deg", "longitude_deg")},

@@ -33,7 +33,7 @@ def test_report_artifacts_are_reproducible(tmp_path):
     second = tmp_path / "second"
     a = generate(first)
     b = generate(second)
-    assert len(a) == len(b) == 13
+    assert len(a) == len(b) == 15
     assert [p.name for p in a] == [p.name for p in b]
     for src, dst in zip(a, b):
         assert src.read_bytes() == dst.read_bytes(), src.name
@@ -44,6 +44,11 @@ def test_report_artifacts_are_reproducible(tmp_path):
     with (first / "rocket_trajectory_demo.csv").open(newline="") as f:
         assert len(list(csv.DictReader(f))) > 100
     assert "<polyline" in (first / "rocket_ascent_demo.svg").read_text()
+    with (first / "rocket_thrust_sensitivity_demo.csv").open(newline="") as f:
+        cases = list(csv.DictReader(f))
+        assert len(cases) == 4
+        assert float(cases[0]["apogee_km"]) < float(cases[-1]["apogee_km"])
+    assert "<polyline" in (first / "rocket_thrust_sensitivity_demo.svg").read_text()
     for plot in [
         "orbit_altitude_demo.svg", "orbit_latitude_demo.svg",
         "space_weather_kp_demo.svg", "telemetry_temperature_demo.svg",

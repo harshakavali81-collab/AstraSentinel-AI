@@ -88,6 +88,16 @@ jobs:
           assert weather['status'] == 'demo'
           assert model['label_source'] == 'controlled_synthetic_injections'
           assert rocket['metrics']['apogee_km'] > 0
+          request = urllib.request.Request(
+              'http://localhost:3000/api/rocket/compare',
+              data=json.dumps({'parameter':'density_multiplier',
+                               'values':[0.5, 1.0, 2.0]}).encode(),
+              headers={'Content-Type':'application/json'},
+              method='POST')
+          with urllib.request.urlopen(request, timeout=30) as response:
+              scenario_study = json.load(response)
+          assert len(scenario_study['scenarios']) == 3
+          assert scenario_study['scenarios'][0]['metrics']['apogee_km'] > scenario_study['scenarios'][2]['metrics']['apogee_km']
           assert report['telemetry_ai']['live_spacecraft_telemetry'] is False
           print('Complete offline container smoke-test passed.')
           PY

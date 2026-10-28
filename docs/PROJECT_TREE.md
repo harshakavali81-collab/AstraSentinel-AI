@@ -18,6 +18,7 @@ AstraSentinel-AI/
 │       ├── orbit.py               SGP4, TEME, approximate ECEF
 │       ├── atmosphere.py          Exponential density and drag
 │       ├── reporting.py           Source-attributed science snapshots
+│       ├── scenarios.py           Bounded rocket sensitivity experiments
 │       ├── rocket.py              Rocket mass, gravity and integration
 │       └── telemetry.py           Synthetic ML anomaly detection
 ├── frontend/
@@ -30,6 +31,7 @@ AstraSentinel-AI/
 │       ├── main.jsx
 │       ├── api.js
 │       ├── App.jsx                Mission pages and charts
+│       ├── ScenarioLab.jsx        One-factor rocket comparison and CSV export
 │       ├── AtmospherePage.jsx     Atmosphere visualization and multiplier
 │       ├── MissionExportPanel.jsx  JSON and CSV browser exports
 │       ├── OrbitGlobe.jsx         Three.js Earth and orbit
@@ -41,6 +43,7 @@ AstraSentinel-AI/
 │   ├── conftest.py                No-network fixture
 │   ├── test_ingestion.py
 │   ├── test_orbit.py
+│   ├── test_scenarios.py
 │   ├── test_rocket.py
 │   ├── test_telemetry.py
 │   └── test_reporting.py

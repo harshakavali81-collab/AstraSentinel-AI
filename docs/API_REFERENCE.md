@@ -16,6 +16,7 @@ Start the Python server and browse the generated **OpenAPI / Swagger interface**
 | POST | /api/telemetry/score | Score one hypothetical telemetry record |
 | GET | /api/rocket/demo | Run the default educational rocket case |
 | POST | /api/rocket | Run an input-controlled rocket case |
+| POST | /api/rocket/compare | Run 2–7 reproducible one-factor rocket experiments and return metrics plus plot points |
 | GET | /api/atmosphere | Calculate reference exponential density curve |
 
 ### Try orbital and weather datasets
@@ -46,6 +47,18 @@ curl -X POST http://localhost:8000/api/rocket \
 ~~~
 
 The result contains a configuration, documented assumptions, metrics (apogee_km, peak_velocity_m_s, max_dynamic_pressure_pa, simulated_time_s), and trajectory points (time_s, altitude_km, velocity_m_s, mass_kg, acceleration_m_s2, dynamic_pressure_pa).
+
+### Compare launch-physics scenarios
+
+The new bounded experiment interface compares 2–7 unique values of one supported parameter while the rest remain at the baseline values.
+
+~~~bash
+curl -X POST http://localhost:8000/api/rocket/compare \
+  -H "Content-Type: application/json" \
+  -d '{"parameter":"thrust_n","values":[25000,30000,35000,40000],"baseline":{"density_multiplier":1}}'
+~~~
+
+The response includes the original baseline configuration and metrics, named variant runs with individual metrics, separately downsampled altitude/velocity curves, apogee change relative to the baseline, parameter units, assumptions and a mandatory scientific disclaimer. Values outside the model's parameter bounds or more than seven scenarios return 422. No mission success probabilities, flight safety advice or calibrated error intervals are inferred.
 
 ### Error and data status contracts
 
