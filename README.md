@@ -10,6 +10,27 @@
 
 Existing project visual; diagrams and illustrative graphics are not evidence of a deployed application.
 
+
+**Eight original, editable SVG pictures and graphs**, committed directly to this GitHub repository. Conceptual graphics are not real flight data or screenshots of an operational mission.
+
+| 3D Orbital Science | Satellite Health AI |
+|:---:|:---:|
+| [![Orbital diagram](docs/gallery/orbital-geometry.svg)](docs/gallery/orbital-geometry.svg) | [![AI telemetry visualization](docs/gallery/satellite-health-intelligence.svg)](docs/gallery/satellite-health-intelligence.svg) |
+| [Orbital geometry](docs/gallery/orbital-geometry.svg) | [Anomaly detection illustration](docs/gallery/satellite-health-intelligence.svg) |
+
+| Space Weather | Rocket Trajectory Graph |
+|:---:|:---:|
+| [![Solar weather illustration](docs/gallery/space-weather-observatory.svg)](docs/gallery/space-weather-observatory.svg) | [![Rocket analysis curves](docs/gallery/rocket-flight-analysis.svg)](docs/gallery/rocket-flight-analysis.svg) |
+| [Sun and Kp example](docs/gallery/space-weather-observatory.svg) | [Numerical rocket simulation](docs/gallery/rocket-flight-analysis.svg) |
+
+| Earth's Atmospheric Layers | Mission Control Design |
+|:---:|:---:|
+| [![Atmospheric science](docs/gallery/atmospheric-layers.svg)](docs/gallery/atmospheric-layers.svg) | [![Mission control interface concept](docs/gallery/mission-control-ui-concept.svg)](docs/gallery/mission-control-ui-concept.svg) |
+| [Atmospheric density](docs/gallery/atmospheric-layers.svg) | [Dashboard visual concept](docs/gallery/mission-control-ui-concept.svg) |
+
+[**Explore all eight images, scientific graphs, and image explanations →**](docs/VISUAL_GALLERY.md)
+
+
 ## Live Link / Demo
 
 Run the local demo using the setup guide below. No public deployment URL has been verified for this documentation update.
